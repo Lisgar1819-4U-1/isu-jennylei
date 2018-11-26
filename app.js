@@ -1,4 +1,5 @@
 let monthBtn = document.getElementsByClassName("month-btn");
+let mainContent = document.getElementById('main-content');
 
 window.onload = function() {
 	monthClick();
@@ -12,6 +13,8 @@ function monthClick() {
 				monthBtn[j].classList.remove("selected");
 			}
 			this.classList.add("selected");
+
+			mainContent.getElementsByTagName("h3")[0].innerText = this.innerText;
 		}
 	}
 }

@@ -9,18 +9,28 @@ html, body {
 	font-weight: 300;
 }
 
-h1, h2 {
-	letter-spacing: 2px;
+h1, h2, h3 {
 	margin: 0;
 	padding: 0 15px;
+}
+
+h1 {
+	letter-spacing: 2px;
 	font-weight: normal;
 }
 
 h2 {
 	letter-spacing: 3px;
-	color: grey;
+	color: lightgrey;
 	font-size: 1.5em;
 	font-weight: 300;
+}
+
+h3 {
+	letter-spacing: 3px;
+	color: grey;
+	font-size: 1.5em;
+	font-weight: normal;
 }
 
 ul {
@@ -108,12 +118,20 @@ li.selected:before {
 }
 
 .main-content {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	padding: 15px;
+	box-sizing: border-box;
+	position: relative;
 	height: 85%;
+	float: right;
+	width: 82%;
 }
 
+/*
 .no-content {
-	background-image: url();
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	background-image: url("circle.svg");
+	background-repeat: no-repeat;
 }
+*/
