@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html>
@@ -41,6 +42,10 @@
 			<div class="no-content">
 				<h2>No announcements for this month!</h2>
 			</div>
+
+				<?php
+				?>
+
 		</div>
 
 		<script src="app.js"></script>
