@@ -21,6 +21,7 @@
 		<div class="side-bar" id="side-bar">
 			<ul>
 				<li class="selected month-btn">September</li>
+				<li class="month-btn">October</li>
 				<li class="month-btn">November</li>
 				<li class="month-btn">December</li>
 				<li class="month-btn">January</li>
@@ -29,6 +30,8 @@
 				<li class="month-btn">April</li>
 				<li class="month-btn">May</li>
 				<li class="month-btn">June</li>
+				<li class="month-btn">July</li>
+				<li class="month-btn">August</li>
 			</ul>
 
 			<div class="float-bottom">
@@ -39,15 +42,17 @@
 		<div class="main-content" id="main-content">
 			<h3>September</h3>
 
-			<div class="no-content">
-				<h2>No announcements for this month!</h2>
-			</div>
-
+			<div class="card-container" id="card-container">
 				<?php
-				?>
+					// $empty = true;
 
+					// writeAnnouncement('YOYOYO');
+
+					// if ($empty) noAnnouncement();
+				?>
+			</div>
 		</div>
 
 		<script src="app.js"></script>
 	</body>
-</html>
+</html>/

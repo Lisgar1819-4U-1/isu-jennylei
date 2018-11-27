@@ -33,6 +33,13 @@ h3 {
 	font-weight: normal;
 }
 
+h4 {
+	margin: 10px 0;
+	color: grey;
+	font-size: 1.5em;
+	font-weight: 300;
+}
+
 ul {
 	padding: 0;
 	margin: 0;
@@ -140,4 +147,25 @@ li.selected:before {
 	position: relative;
 	top: 50%;
 	transform: translateY(-50%);
+}
+
+.card-container {
+	height: 90%;
+	width: 100%;
+	padding: 10px 20px;
+}
+
+.card {
+	background-color: #eeeeee;
+	/*height: 100px;*/
+	width: 40%;
+	box-sizing: border-box;
+	padding: 5px 10px;
+	border-radius: 3px;
+}
+
+.card-title {
+	letter-spacing: 2px;
+	font-size: 1.2em;
+	margin: 5px 0;
 }
