@@ -65,11 +65,11 @@
 				<h1>LOG IN</h1>
 			</div>
 			<div class="float-left half flex">
-				<form>
+				<form method="post">
 					<fieldset>
 						<legend>Sign in</legend>
-						<input type="email" name="email" placeholder="Email"/><br>
-						<input type="password" name="password" placeholder="Password"/><br>
+						<input type="email" name="email" placeholder="Email" required/><br>
+						<input type="password" name="password" placeholder="Password" required/><br>
 						<input type="submit" value="Log In"/><br>
 						<input type="button" value="Cancel" id="cancel-log-in" />
 					</fieldset>
@@ -77,6 +77,17 @@
 			</div>
 		</div>
 
+		<?php
+			$email = 'a@b.c';
+			$password = 'abc';
+			$match = false;
+
+			// echo "imput";
+			if ($_POST["email"] == "" || $_POST["password"] == "") {
+			} if ($_POST["email"] == $email && $_POST["password"] == $password) {
+				echo "<script> window.location.assign('lisgarci.ocdsb.ca'); </script>";
+			}
+		?>
 		<script src="app.js"></script>
 	</body>
 </html>
