@@ -14,7 +14,9 @@
 			<h1>Lisgar Announcements</h1>
 
 			<div class="float-right">
-				<p class="header-btn log-in" id="log-in">Log in</p>
+				<p class="header-btn create" id="create">Create</p>
+				<p class="header-btn settings" id="settings">Settings</p>
+				<p class="header-btn log-out" id="log-out">Log out</p>
 			</div>
 		</div>
 
