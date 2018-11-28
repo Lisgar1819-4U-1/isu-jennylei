@@ -1,6 +1,8 @@
 let monthBtn = document.getElementsByClassName("month-btn");
 let mainContent = document.getElementById('main-content');
 let cardContainer = document.getElementById('card-container');
+let logInBtn = document.getElementById('log-in');
+let cancelLogInBtn = document.getElementById('cancel-log-in');
 
 window.onload = function() {
 	monthClick();
@@ -11,6 +13,9 @@ window.onload = function() {
 	createAnnouncement('lololo2', 5, 2);
 
 	sortAnnouncement(0);
+
+	logInClick();
+	cancelLogInClick();
 }
 
 function monthClick() {
@@ -77,4 +82,19 @@ function createCard(i, title, date, month) {
 		<div class="card">
 			<p class="card-title">${title}</p>
 		</div>`;
+}
+
+function logInClick() {
+	logInBtn.onclick = function() {
+		document.getElementById("log-in-container").style.display = "block";
+	}
+}
+
+function cancelLogInClick() {
+	cancelLogInBtn.onclick = function() {
+		document.getElementById("log-in-container").style.display = "none";
+
+		document.getElementsByName('email')[0].value = "";
+		document.getElementsByName('password')[0].value = "";
+	}
 }

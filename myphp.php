@@ -18,38 +18,57 @@
 			</div>
 		</div>
 
-		<div class="side-bar" id="side-bar">
-			<ul>
-				<li class="selected month-btn">September</li>
-				<li class="month-btn">October</li>
-				<li class="month-btn">November</li>
-				<li class="month-btn">December</li>
-				<li class="month-btn">January</li>
-				<li class="month-btn">February</li>
-				<li class="month-btn">March</li>
-				<li class="month-btn">April</li>
-				<li class="month-btn">May</li>
-				<li class="month-btn">June</li>
-				<li class="month-btn">July</li>
-				<li class="month-btn">August</li>
-			</ul>
+		<div class="main-container">
+			<div class="side-bar" id="side-bar">
+				<ul>
+					<li class="selected month-btn">September</li>
+					<li class="month-btn">October</li>
+					<li class="month-btn">November</li>
+					<li class="month-btn">December</li>
+					<li class="month-btn">January</li>
+					<li class="month-btn">February</li>
+					<li class="month-btn">March</li>
+					<li class="month-btn">April</li>
+					<li class="month-btn">May</li>
+					<li class="month-btn">June</li>
+					<li class="month-btn">July</li>
+					<li class="month-btn">August</li>
+				</ul>
 
-			<div class="float-bottom">
-				Return to <a href="https://lisgarci.ocdsb.ca/">Lisgar CI</a>
+				<div class="float-bottom">
+					Return to <a href="https://lisgarci.ocdsb.ca/">Lisgar CI</a>
+				</div>
+			</div>
+
+			<div class="main-content" id="main-content">
+				<h3>September</h3>
+
+				<div class="card-container" id="card-container">
+					<?php
+						// $empty = true;
+
+						// writeAnnouncement('YOYOYO');
+
+						// if ($empty) noAnnouncement();
+					?>
+				</div>
 			</div>
 		</div>
 
-		<div class="main-content" id="main-content">
-			<h3>September</h3>
-
-			<div class="card-container" id="card-container">
-				<?php
-					// $empty = true;
-
-					// writeAnnouncement('YOYOYO');
-
-					// if ($empty) noAnnouncement();
-				?>
+		<div class="log-in-container" id="log-in-container">
+			<div class="float-left half flex">
+				<h1>LOG IN</h1>
+			</div>
+			<div class="float-left half flex">
+				<form>
+					<fieldset>
+						<legend>Sign in</legend>
+						<input type="email" name="email" placeholder="Email"/><br>
+						<input type="password" name="password" placeholder="Password"/><br>
+						<input type="submit" value="Log In"/><br>
+						<input type="button" value="Cancel" id="cancel-log-in" />
+					</fieldset>
+				</form>
 			</div>
 		</div>
 

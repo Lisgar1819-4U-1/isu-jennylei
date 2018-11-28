@@ -79,11 +79,14 @@ li.selected:before {
 	left: 0px;
 }
 
+/* HEADER */
+
 .color-strip {
 	position: absolute;
 	background-color: blue;
 	width: 100%;
 	height: 7px;
+	z-index: 200;
 }
 
 .header {
@@ -100,8 +103,84 @@ li.selected:before {
 	float: right;
 }
 
+.float-left {
+	position: relative;
+	float: left;
+}
+
+.half {
+	width: 50%;
+	height: 100%;
+}
+
+.flex {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/* LOG IN MENU */
+
 .log-in {
-	padding: 0 15px;
+	margin: 0 15px;
+	cursor: pointer;
+	transition: 0.3s;
+}
+
+.log-in:hover {
+	text-decoration: underline;
+}
+
+.log-in-container {
+	display: none;
+	top: 0;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: white;
+	z-index: 100;
+}
+
+form {
+	font-size: 1.2em;
+	width: 70%;
+}
+
+fieldset {
+	padding: 30px;
+	border: 1px solid grey;
+	border-radius: 3px;
+}
+
+legend {
+	padding: 0 10px;
+}
+
+input {
+	border-radius: 3px;
+	border: 1px solid lightgrey;
+	padding: 20px;
+	margin: 10px 0;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+input[type='button'], input[type='submit'] {
+	cursor: pointer;
+} 
+
+input[type='email'], input[type='password'] {
+	border-left: 3px solid blue;
+}
+
+/* MAIN CONTAINER */
+
+.main-container {
+	position: relative;
+	width: 100%;
+	height: 85%;
+	/*background-color: tomato;*/
+	z-index: 100;
 }
 
 .side-bar {
@@ -109,7 +188,7 @@ li.selected:before {
 	position: relative;
 	box-sizing: border-box;
 	float: left;
-	height: 85%;
+	height: 100%;
 	width: 18%;
 	border-right: 1px solid grey;
 }
@@ -128,7 +207,7 @@ li.selected:before {
 	padding: 15px;
 	box-sizing: border-box;
 	position: relative;
-	height: 85%;
+	height: 100%;
 	width: 82%;
 	float: right;
 }
