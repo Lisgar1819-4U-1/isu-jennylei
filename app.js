@@ -4,11 +4,13 @@ let cardContainer = document.getElementById('card-container');
 
 window.onload = function() {
 	monthClick();
+
 	createAnnouncement('lololo', 4, 1);
 	createAnnouncement('lololo', 5, 1);
 	createAnnouncement('lololo2', 5, 1);
 	createAnnouncement('lololo2', 5, 2);
-	// createAnnouncement('lololo', 6, '1');
+
+	sortAnnouncement(0);
 }
 
 function monthClick() {
@@ -22,13 +24,17 @@ function monthClick() {
 
 			mainContent.getElementsByTagName("h3")[0].innerText = this.innerText;
 
-			for	(let j = 0; j < cardContainer.children.length; j++) {
-				cardContainer.children[j].style.display = 'block';
+			sortAnnouncement(i);
+		}
+	}
+}
 
-				if (cardContainer.children[j].classList[2] != i + 1) {
-					cardContainer.children[j].style.display = 'none';
-				}
-			}
+function sortAnnouncement(i) {
+	for	(let j = 0; j < cardContainer.children.length; j++) {
+		cardContainer.children[j].style.display = 'block';
+
+		if (cardContainer.children[j].classList[2] != i + 1) {
+			cardContainer.children[j].style.display = 'none';
 		}
 	}
 }
