@@ -3,6 +3,11 @@ let mainContent = document.getElementById('main-content');
 let cardContainer = document.getElementById('card-container');
 let logInBtn = document.getElementById('log-in');
 let cancelLogInBtn = document.getElementById('cancel-log-in');
+let expandableAnnouncement = document.getElementById('expandable');
+let overlay = document.getElementById('overlay');
+let cards = document.getElementsByClassName('card');
+
+let months = ['September', 'October', 'November', 'December', 'January', 'February', 'March', 'May', 'April', 'May', 'June', 'July', 'August'];
 
 window.onload = function() {
 	monthClick();
@@ -16,6 +21,8 @@ window.onload = function() {
 
 	logInClick();
 	cancelLogInClick();
+	expandAnnouncement();
+	closeAnnouncement();
 }
 
 function monthClick() {
@@ -86,15 +93,48 @@ function createCard(i, title, date, month) {
 
 function logInClick() {
 	logInBtn.onclick = function() {
+		// document.getElementById("log-in-container").style.top = 0;
 		document.getElementById("log-in-container").style.display = "block";
 	}
 }
 
 function cancelLogInClick() {
 	cancelLogInBtn.onclick = function() {
+		// document.getElementById("log-in-container").style.top = "100%";
 		document.getElementById("log-in-container").style.display = "none";
 
 		document.getElementsByName('email')[0].value = "";
 		document.getElementsByName('password')[0].value = "";
+	}
+}
+
+function expandAnnouncement() {
+	for(let i = 0; i < cards.length; i++) {
+		cards[i].onclick = function() {
+			console.log(this);
+			expandable.classList.add('half-screen');
+			expandable.classList.remove('no-padding');
+			overlay.classList.add('full-screen');
+
+			title = this.firstElementChild.innerText;
+			date = this.parentElement.classList[1];
+			month = this.parentElement.classList[2];
+
+			expandable.innerHTML = `
+				<h4>${title}</h4>
+				<p>Date: ${months[month-1]} ${date}</p>
+
+				<p>Description:</p>
+				<p>asdlhgf;alshhgll;hdlshkglhsa;glsgd</p>
+			`;
+		}
+	}
+}
+
+function closeAnnouncement() {
+	overlay.onclick = function() {
+		expandable.classList.remove('half-screen');
+		expandable.classList.add('no-padding');
+		overlay.classList.remove('full-screen');
 	}
 }

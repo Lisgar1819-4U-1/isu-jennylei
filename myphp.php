@@ -55,6 +55,11 @@
 			</div>
 		</div>
 
+		<div class="overlay" id="overlay">
+			<div class="expandable no-padding" id="expandable">
+			</div>
+		</div>
+
 		<div class="log-in-container" id="log-in-container">
 			<div class="float-left half flex">
 				<h1>LOG IN</h1>
@@ -74,4 +79,4 @@
 
 		<script src="app.js"></script>
 	</body>
-</html>/
+</html>
