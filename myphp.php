@@ -78,6 +78,8 @@
 				echo "<script> window.location.assign('admin.php'); </script>";
 			}
 		?>
+
 		<script src="app.js"></script>
+		<script src="jquery-3.3.1.js"></script>
 	</body>
 </html>

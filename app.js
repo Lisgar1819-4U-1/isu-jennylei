@@ -5,30 +5,43 @@ let logInBtn = document.getElementById('log-in');
 let cancelLogInBtn = document.getElementById('cancel-log-in');
 let expandableAnnouncement = document.getElementById('expandable');
 let overlay = document.getElementById('overlay');
+let closeOverlayBtn = document.getElementById('close-overlay');
 let cards = document.getElementsByClassName('card');
 
 let months = ['September', 'October', 'November', 'December', 'January', 'February', 'March', 'May', 'April', 'May', 'June', 'July', 'August'];
+let curMonth = 1;
 
 window.onload = function() {
 	monthClick();
 
 	createAnnouncement('lololo', 4, 1, 'contests', 'lisgar musical production');
 	createAnnouncement('lololo', 5, 1, 'contests', 'lisgar musical production');
-	createAnnouncement('lololo', 6, 2, 'contests', 'lisgar musical production');
+	createAnnouncement('lololo', 6, 1, 'contests', 'lisgar musical production');
+	createAnnouncement('lololo', 6, 1, 'contests', 'lisgar musical production');
 	createAnnouncement('lololo2', 5, 1, 'contests', 'lisgar musical production');
+	createAnnouncement('lololo2', 7, 1, 'contests', 'lisgar musical production');
+	createAnnouncement('lololo', 11, 1, 'contests', 'lisgar musical production');
+	createAnnouncement('lololo', 15, 1, 'contests', 'lisgar musical production');
+	createAnnouncement('lololo', 15, 1, 'contests', 'lisgar musical production');
+	createAnnouncement('lololo', 17, 1, 'contests', 'lisgar musical production');
+	createAnnouncement('lololo2', 31, 1, 'contests', 'lisgar musical production');
 
-	sortAnnouncement(0);
+	sortAnnouncement();
+	floatAnnouncements();
 
 	logInClick();
 	cancelLogInClick();
 	expandAnnouncement();
-	closeAnnouncement();
+	overlayClick();
+	// closeClick();
 }
 
 function monthClick() {
 	for(let i = 0; i < monthBtn.length; i++) {
 
 		monthBtn[i].onclick = function() {
+			curMonth = i + 1;
+
 			for(let j = 0; j < monthBtn.length; j++) {
 				monthBtn[j].classList.remove("selected");
 			}
@@ -36,17 +49,19 @@ function monthClick() {
 
 			mainContent.getElementsByTagName("h3")[0].innerText = this.innerText;
 
-			sortAnnouncement(i);
+			sortAnnouncement();
 		}
 	}
 }
 
-function sortAnnouncement(i) {
+function sortAnnouncement() {
 	for	(let j = 0; j < cardContainer.children.length; j++) {
-		cardContainer.children[j].style.display = 'block';
+			cardContainer.children[j].classList.add('visible');
+			$(cardContainer.children[j]).show('slow');
 
-		if (cardContainer.children[j].classList[2] != i + 1) {
-			cardContainer.children[j].style.display = 'none';
+		if (cardContainer.children[j].classList[2] != curMonth) {
+			$(cardContainer.children[j]).hide('slow');
+			// cardContainer.children[j].classList.remove('visible');
 		}
 	}
 }
@@ -127,6 +142,8 @@ function expandAnnouncement() {
 			month = this.parentElement.classList[2];
 
 			expandable.innerHTML = `
+				<div class="close-overlay" id="close-overlay" onclick="closeAnnouncement()">&#10005;</div>
+
 				<p class="card-info border">${category}</p>
 				<p class="card-info">${group}</p>
 
@@ -141,10 +158,38 @@ function expandAnnouncement() {
 	}
 }
 
-function closeAnnouncement() {
+function overlayClick() {
 	overlay.onclick = function() {
-		expandable.classList.remove('half-screen');
-		expandable.classList.add('no-padding');
-		overlay.classList.remove('full-screen');
+		closeAnnouncement();
+	}
+}
+
+function closeAnnouncement() {
+	expandable.classList.remove('half-screen');
+	expandable.classList.add('no-padding');
+	overlay.classList.remove('full-screen');
+}
+
+function floatAnnouncements() {
+	let float = 0;
+
+	for(let i = 0; i < cardContainer.children.length; i++) {
+		if (cardContainer.children[i].classList.contains('visible')) {
+			// cardContainer.children[i].classList.remove('col-1');
+			// cardContainer.children[i].classList.remove('col-2');
+
+			switch(float) {
+				case 0: {
+					cardContainer.children[i].classList.add('col-1');
+					float++;
+					break;
+					}
+				case 1: {
+					cardContainer.children[i].classList.add('col-2');
+					float--;
+					break;
+				}
+			}
+		}
 	}
 }
