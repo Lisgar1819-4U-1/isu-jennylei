@@ -35,7 +35,7 @@ h3 {
 
 h4 {
 	margin: 10px 0;
-	color: grey;
+	color: black;
 	font-size: 1.5em;
 	font-weight: 300;
 }
@@ -242,13 +242,13 @@ input[type='email'], input[type='password'] {
 
 .card {
 	background-color: #eeeeee;
-	/*height: 100px;*/
 	width: 40%;
 	box-sizing: border-box;
-	padding: 5px 10px;
+	padding: 10px;
 	border-radius: 3px;
 	margin: 3px 0;
 	cursor: pointer;
+	position: relative;
 	transition: 0.3s;
 }
 
@@ -256,11 +256,39 @@ input[type='email'], input[type='password'] {
 	letter-spacing: 2px;
 	font-size: 1.2em;
 	margin: 5px 0;
+	margin-top: 15px;
+}
+
+.card-info {
+	font-size: 0.9em;
+	margin: 2px 0;
+}
+
+.card-category {
+}
+
+.border {
+	border: 1px solid black;
+	padding: 5px;
+	box-sizing: border-box;
+	display: inline-block;
 }
 
 .card:hover {
 	background-color: #dddddd;
-}
+}/*
+
+.card:after {
+	content: "";
+	width: 30px;
+	height: 30px;
+	background: url("edit.png") no-repeat 0 0;
+	top: 50%;
+	transform: translateY(-50%);
+	right: 5px;
+	position: absolute;
+	display: inline-block;
+}*/
 
 .overlay {
 	height: 0;

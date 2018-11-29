@@ -12,10 +12,10 @@ let months = ['September', 'October', 'November', 'December', 'January', 'Februa
 window.onload = function() {
 	monthClick();
 
-	createAnnouncement('lololo', 4, 1);
-	createAnnouncement('lololo', 5, 1);
-	createAnnouncement('lololo2', 5, 1);
-	createAnnouncement('lololo2', 5, 2);
+	createAnnouncement('lololo', 4, 1, 'contests', 'lisgar musical production');
+	createAnnouncement('lololo', 5, 1, 'contests', 'lisgar musical production');
+	createAnnouncement('lololo', 6, 2, 'contests', 'lisgar musical production');
+	createAnnouncement('lololo2', 5, 1, 'contests', 'lisgar musical production');
 
 	sortAnnouncement(0);
 
@@ -51,7 +51,7 @@ function sortAnnouncement(i) {
 	}
 }
 
-function createAnnouncement(title, date, month) {
+function createAnnouncement(title, date, month, category, group) {
 	console.log(date);
 	let index = 0;
 	let exists = false;
@@ -74,7 +74,7 @@ function createAnnouncement(title, date, month) {
 	}
 
 	console.log(date + ": " + index);
-	createCard(index, title, date, month);
+	createCard(index, title, date, month, category, group);
 }
 
 function createDate(date, month) {
@@ -84,14 +84,18 @@ function createDate(date, month) {
 		</div>`;
 }
 
-function createCard(i, title, date, month) {
+function createCard(i, title, date, month, category, group) {
 	cardContainer.children[i].innerHTML += `
 		<div class="card">
+			<p class="card-info card-category border">${category}</p>
+			<p class="card-info">${group}</p>
 			<p class="card-title">${title}</p>
 		</div>`;
 }
 
 function logInClick() {
+	if (!logInBtn) return;
+
 	logInBtn.onclick = function() {
 		// document.getElementById("log-in-container").style.top = 0;
 		document.getElementById("log-in-container").style.display = "block";
@@ -116,16 +120,22 @@ function expandAnnouncement() {
 			expandable.classList.remove('no-padding');
 			overlay.classList.add('full-screen');
 
-			title = this.firstElementChild.innerText;
+			category = this.children[0].innerText;
+			group = this.children[1].innerText;
+			title = this.children[2].innerText;
 			date = this.parentElement.classList[1];
 			month = this.parentElement.classList[2];
 
 			expandable.innerHTML = `
-				<h4>${title}</h4>
-				<p>Date: ${months[month-1]} ${date}</p>
+				<p class="card-info border">${category}</p>
+				<p class="card-info">${group}</p>
 
-				<p>Description:</p>
-				<p>asdlhgf;alshhgll;hdlshkglhsa;glsgd</p>
+				<h4>${title}</h4>
+				<p class="card-info">Date: ${months[month-1]} ${date}</p>
+				<br>
+
+				<p class="card-info">Description:</p>
+				<p class="card-info" style="margin-left: 2em;">asdlhgf;alshhgll;hdlshkglhsa;glsgd</p>
 			`;
 		}
 	}

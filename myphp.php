@@ -48,10 +48,8 @@
 			</div>
 		</div>
 
-		<div class="overlay" id="overlay">
-			<div class="expandable no-padding" id="expandable">
-			</div>
-		</div>
+		<div class="overlay" id="overlay"></div>
+		<div class="expandable no-padding" id="expandable"></div>
 
 		<div class="log-in-container" id="log-in-container">
 			<div class="float-left half flex">
@@ -77,7 +75,7 @@
 
 			if ($_POST["email"] == "" || $_POST["password"] == "") {
 			} if ($_POST["email"] == $email && $_POST["password"] == $password) {
-				echo "<script> window.location.assign('lisgarci.ocdsb.ca'); </script>";
+				echo "<script> window.location.assign('admin.php'); </script>";
 			}
 		?>
 		<script src="app.js"></script>
