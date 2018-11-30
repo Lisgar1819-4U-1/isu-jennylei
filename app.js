@@ -57,11 +57,12 @@ function monthClick() {
 function sortAnnouncement() {
 	for	(let j = 0; j < cardContainer.children.length; j++) {
 			cardContainer.children[j].classList.add('visible');
-			$(cardContainer.children[j]).show('slow');
 
 		if (cardContainer.children[j].classList[2] != curMonth) {
 			$(cardContainer.children[j]).hide('slow');
 			// cardContainer.children[j].classList.remove('visible');
+		} else {
+			$(cardContainer.children[j]).show('slow');
 		}
 	}
 }

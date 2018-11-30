@@ -92,6 +92,7 @@ li.selected:before {
 }
 
 .header {
+	/*background-color: rgba(0, 0, 255, 0.1);*/
 	height: 15%;
 	width: 100%;
 	display: flex;
@@ -188,6 +189,8 @@ input[type='email'], input[type='password'] {
 	z-index: 100;
 }
 
+/* SIDEBAR */
+
 .side-bar {
 	padding: 0 30px;
 	position: relative;
@@ -204,7 +207,7 @@ input[type='email'], input[type='password'] {
 	position: absolute;
 	left: 0;
 	bottom: 0;
-	background-color: #eeeeee;
+	background-color: rgb(245, 245, 245);
 	line-height: 3em;
 }
 
