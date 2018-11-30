@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html>
@@ -14,9 +13,9 @@
 			<h1>Lisgar Announcements</h1>
 
 			<div class="float-right">
-				<p class="header-btn create" id="create">Create</p>
-				<p class="header-btn settings" id="settings">Settings</p>
-				<p class="header-btn log-out" id="log-out">Log out</p>
+				<p class="header-btn create" id="create" onclick="openCreate()">Create</p>
+				<p class="header-btn settings" id="settings" onclick="openSettings()">Settings</p>
+				<p class="header-btn log-out" id="log-out" onclick="location.href='myphp.php'">Log out</p>
 			</div>
 		</div>
 
@@ -55,20 +54,49 @@
 			</div>
 		</div>
 
-		<div class="log-in-container" id="log-in-container">
+		<div class="create-container form-container" id="create-container">
 			<div class="float-left half flex">
-				<h1>LOG IN</h1>
+				<h1>CREATE ANNOUNCEMENT</h1>
 			</div>
 			<div class="float-left half flex">
 				<form method="post">
 					<fieldset>
-						<legend>Sign in</legend>
-						<input type="email" name="email" placeholder="Email" required/><br>
-						<input type="password" name="password" placeholder="Password" required/><br>
-						<input type="submit" value="Log In"/><br>
-						<input type="button" value="Cancel" id="cancel-log-in" />
+						<legend>Create Announcement</legend>
+						<input type="text" name="title" placeholder="Title" required/><br>
+
+						<input type="date" name="date" class="half-width" required/>
+						<input type="time" name="time" class="half-width float-right"/><br>
+						<input type="text" name="room" placeholder="Room Number"/>
+
+						<select>
+							<option autofocus>Select Category</option>
+							<option onclick="createNewGroup()">Create New Category</option>
+						</select>
+						<br>
+
+						<select>
+							<option autofocus>Organization, Team or Group </option>
+							<option onclick="createNewGroup()">Create New Category</option>
+						</select>
+
+						<input type="text" name="description" placeholder="Description"/>
+
+						<input type="submit" value="Create">
+						<input type="button" value="Cancel" onclick="closeCreate()">
 					</fieldset>
 				</form>
+			</div>
+		</div>
+
+		<div class="settings-container form-container" id="settings-container">
+			<div class="float-left half flex">
+				<h1>SETTINGS</h1>
+			</div>
+			<div class="float-left half flex">
+				<fieldset>
+					<legend>Settings</legend>
+
+				</fieldset>
 			</div>
 		</div>
 
@@ -83,5 +111,27 @@
 			}
 		?>
 		<script src="app.js"></script>
+		<script type="text/javascript">
+			function openCreate() {
+				document.getElementById('create-container').style.display = "block";
+			}
+
+			function closeCreate() {
+				document.getElementById('create-container').style.display = "none";
+			}
+
+			function openSettings() {
+				document.getElementById('settings-container').style.display = "block";
+			}
+
+			function closeSettings() {
+				document.getElementById('settings-container').style.display = "none";
+			}
+
+			function createNewGroup() {
+				document.getElementById('main-content').innerHTML += {
+				}
+			}
+		</script>
 	</body>
 </html>
