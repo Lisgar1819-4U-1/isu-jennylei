@@ -259,13 +259,13 @@ input[type='email'], input[type='password'] {
 .card-title {
 	letter-spacing: 2px;
 	font-size: 1.2em;
-	margin: 5px 0;
-	margin-top: 15px;
+	margin: 10px 0;
 }
 
 .card-info {
 	font-size: 0.9em;
 	margin: 2px 0;
+	word-wrap: break-word;
 }
 
 .col-1 {

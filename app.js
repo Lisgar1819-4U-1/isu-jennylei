@@ -14,17 +14,17 @@ let curMonth = 1;
 window.onload = function() {
 	monthClick();
 
-	createAnnouncement('lololo', 4, 1, 'contests', 'lisgar musical production');
-	createAnnouncement('lololo', 5, 1, 'contests', 'lisgar musical production');
-	createAnnouncement('lololo', 6, 1, 'contests', 'lisgar musical production');
-	createAnnouncement('lololo', 6, 1, 'contests', 'lisgar musical production');
-	createAnnouncement('lololo2', 5, 1, 'contests', 'lisgar musical production');
-	createAnnouncement('lololo2', 7, 1, 'contests', 'lisgar musical production');
-	createAnnouncement('lololo', 11, 1, 'contests', 'lisgar musical production');
-	createAnnouncement('lololo', 15, 1, 'contests', 'lisgar musical production');
-	createAnnouncement('lololo', 15, 1, 'contests', 'lisgar musical production');
-	createAnnouncement('lololo', 17, 1, 'contests', 'lisgar musical production');
-	createAnnouncement('lololo2', 31, 1, 'contests', 'lisgar musical production');
+	createAnnouncement('lololo', 4, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
+	createAnnouncement('lololo', 5, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
+	createAnnouncement('lololo', 6, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
+	createAnnouncement('lololo', 6, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
+	createAnnouncement('lololo2', 5, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
+	createAnnouncement('lololo2', 7, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
+	createAnnouncement('lololo', 11, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
+	createAnnouncement('lololo', 15, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
+	createAnnouncement('lololo', 15, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
+	createAnnouncement('lololo', 17, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
+	createAnnouncement('lololo2', 31, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
 
 	sortAnnouncement();
 	floatAnnouncements();
@@ -67,7 +67,7 @@ function sortAnnouncement() {
 	}
 }
 
-function createAnnouncement(title, date, month, category, group) {
+function createAnnouncement(title, date, month, category, group, room, time) {
 	console.log(date);
 	let index = 0;
 	let exists = false;
@@ -90,7 +90,7 @@ function createAnnouncement(title, date, month, category, group) {
 	}
 
 	console.log(date + ": " + index);
-	createCard(index, title, date, month, category, group);
+	createCard(index, title, date, month, category, group, room, time);
 }
 
 function createDate(date, month) {
@@ -100,12 +100,25 @@ function createDate(date, month) {
 		</div>`;
 }
 
-function createCard(i, title, date, month, category, group) {
-	cardContainer.children[i].innerHTML += `
+/*
+	Announcement information
+
+	Title
+	Date
+	Time
+	Category
+	Group
+*/
+function createCard(num, title, date, month, category, group, room, time) {
+	cardContainer.children[num].innerHTML += `
 		<div class="card">
 			<p class="card-info card-category border">${category}</p>
 			<p class="card-info">${group}</p>
+
 			<p class="card-title">${title}</p>
+
+			<p class="card-info card-setting">${time}</p>
+			<p class="card-info card-setting">Room ${room}</p>
 		</div>`;
 }
 
@@ -139,6 +152,8 @@ function expandAnnouncement() {
 			category = this.children[0].innerText;
 			group = this.children[1].innerText;
 			title = this.children[2].innerText;
+			time = this.children[3].innerText;
+			room = this.children[4].innerText;
 			date = this.parentElement.classList[1];
 			month = this.parentElement.classList[2];
 
@@ -150,6 +165,10 @@ function expandAnnouncement() {
 
 				<h4>${title}</h4>
 				<p class="card-info">Date: ${months[month-1]} ${date}</p>
+				<p class="card-info">${time}</p>
+				<br>
+
+				<p class="card-info">Room ${room}</p>
 				<br>
 
 				<p class="card-info">Description:</p>
