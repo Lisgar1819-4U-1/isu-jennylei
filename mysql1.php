@@ -23,9 +23,9 @@ echo "No result found!";
 }
 
 
-$data = "INSERT INTO announcements (title, category_id, topic_id, location, content, datetime) VALUES ('Test input', 1, 1, 'This is test location','This is a test input', now())";
-if($con->query($data) === true)
-	echo "ADDEDDDDDD";
+//$data = "INSERT INTO announcements (title, category_id, topic_id, location, content, datetime) VALUES ('Test input', 1, 1, 'This is test location','This is a test input', now())";
+//if($con->query($data) === true)
+//	echo "ADDEDDDDDD";
 
 $con->close();
 ?>

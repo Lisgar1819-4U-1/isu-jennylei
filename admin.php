@@ -8,12 +8,14 @@
 	</head>
 	<body>
 		<?php
-			echo "DB connection test<br/>";
+			//echo "DB connection test<br/>";
 
 			$con = new mysqli("127.0.0.1", "root", "root", "announcements");
 			if ($con->connect_error) {
 			die("DB Connection failed : " . $con->connect_error);
 			}
+
+			date_default_timezone_set('US/Eastern');
 		?>
 
 		<div class="color-strip"></div>
@@ -75,17 +77,17 @@
 
 						<input type="date" name="date" class="half-width" required/>
 						<input type="time" name="time" class="half-width float-right"/><br>
-						<input type="text" name="room" placeholder="Room Number"/>
+						<input type="text" name="location" placeholder="Location"/>
 
-						<select>
+						<select name="category">
 							<option autofocus>Select Category</option>
 							<?php
-								$result = $con->query("SELECT name FROM Category");
+								$result = $con->query("SELECT id, name FROM Category");
 
 								if ($result->num_rows > 0) {
 									// create option for each category type
 									while($row = $result->fetch_assoc()) {
-										echo "<option>" . $row["name"] . "</option>";
+										echo '<option value = "' . $row["id"] . '">' . $row["name"] . "</option>";
 									}
 								}
 							?>
@@ -93,15 +95,15 @@
 						</select>
 						<br>
 
-						<select>
+						<select name="organization">
 							<option autofocus>Organization, Team or Group </option>
 							<?php
-								$result = $con->query("SELECT name FROM Topic");
+								$result = $con->query("SELECT id, name FROM Topic");
 
 								if ($result->num_rows > 0) {
 									// create option for each category type
 									while($row = $result->fetch_assoc()) {
-										echo "<option>" . $row["name"] . "</option>";
+										echo '<option value = "' . $row["id"] . '">' . $row["name"] . "</option>";
 									}
 								}
 							?>
@@ -116,6 +118,23 @@
 				</form>
 			</div>
 		</div>
+		<?php
+			$title = $con->real_escape_string($_REQUEST['title']);
+			$date = $con->real_escape_string($_REQUEST['date']);
+			$time = $con->real_escape_string($_REQUEST['time']);
+			$location = $con->real_escape_string($_REQUEST['location']);
+			$category = $con->real_escape_string($_REQUEST['category']);
+			$organization = $con->real_escape_string($_REQUEST['organization']);
+			$content = $con->real_escape_string($_REQUEST['description']);
+
+			$timestamp = date('Y-m-d H:i:s', strtotime($date . ' ' . $time));
+
+			$sql = "INSERT INTO Announcements (title, dateTime, location, content, category_id, topic_id) VALUES ('$title', '$timestamp', '$location', '$content', $category, $organization)";
+
+			echo "sql = " . $sql;
+
+			$con->query($sql);
+		?>
 
 		<div class="settings-container form-container" id="settings-container">
 			<div class="float-left half flex">
