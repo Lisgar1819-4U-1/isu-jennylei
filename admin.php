@@ -7,6 +7,15 @@
 		<link rel="stylesheet" type="text/css" href="style.css">
 	</head>
 	<body>
+		<?php
+			echo "DB connection test<br/>";
+
+			$con = new mysqli("127.0.0.1", "root", "root", "announcements");
+			if ($con->connect_error) {
+			die("DB Connection failed : " . $con->connect_error);
+			}
+		?>
+
 		<div class="color-strip"></div>
 
 		<div class="header" id="header">
@@ -70,12 +79,32 @@
 
 						<select>
 							<option autofocus>Select Category</option>
+							<?php
+								$result = $con->query("SELECT name FROM Category");
+
+								if ($result->num_rows > 0) {
+									// create option for each category type
+									while($row = $result->fetch_assoc()) {
+										echo "<option>" . $row["name"] . "</option>";
+									}
+								}
+							?>
 							<option onclick="createNewGroup()">Create New Category</option>
 						</select>
 						<br>
 
 						<select>
 							<option autofocus>Organization, Team or Group </option>
+							<?php
+								$result = $con->query("SELECT name FROM Topic");
+
+								if ($result->num_rows > 0) {
+									// create option for each category type
+									while($row = $result->fetch_assoc()) {
+										echo "<option>" . $row["name"] . "</option>";
+									}
+								}
+							?>
 							<option onclick="createNewGroup()">Create New Category</option>
 						</select>
 
