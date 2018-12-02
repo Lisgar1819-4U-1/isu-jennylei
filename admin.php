@@ -56,6 +56,61 @@
 				<h3>September</h3>
 
 				<div class="card-container" id="card-container">
+					<?php
+						$result = $con->query("SELECT ans.Title as title, cat.Name as category, top.Name as topic, ans.Location as location, ans.Content as content, date(ans.Datetime) as date, day(ans.Datetime) as day, date_format(ans.Datetime, '%l:%i %p') as time from Announcements as ans, Category as cat, Topic as top where ans.category_id=cat.id and ans.topic_id=top.id order by day");
+
+						if ( $result->num_rows > 0 ){
+							// echo "<table border='1'>";
+							// echo "<tr><th>Title</th><th>Category</th><th>Topic</th></tr>";
+
+							$index = 1;
+							$ended = false;
+							while($row = $result->fetch_assoc()){
+								$title = $row["title"];
+								$category = $row["category"];
+								$topic = $row["topic"];
+								$location = $row["location"];
+								$time = $row["time"];
+								$day = $row["day"];
+
+								if ( $index <= $day ){
+									if ( $ended ){
+										echo '</div>';
+										$ended = false;
+									}
+
+									echo '
+										<div class="dates">
+											<h4 class="date">' . $day . '</h4>';
+									$index++;
+									
+									$ended = true;
+								}
+
+								echo '
+									<div class="card">
+										<p class="card-info card-category border">' . $category . '</p>
+										<p class="card-info">' . $topic . '</p>
+										<p class="card-title">' . $title . '</p>
+										<p class="card-info card-setting">' . $time . '</p>
+										<p class="card-info card-setting">' . $location . '</p>
+									</div>';
+
+								// echo "<tr>";
+								// echo "<td>" . $row["title"] . "</td><td>" . $row["category"] . "</td><td>" . $row["topic"] . "</td>";
+								// echo "</tr>";
+							}
+	
+							if ( $ended ){
+								echo '</div>';
+								$ended = false;
+
+								$index++;
+							}
+
+							// echo "</table>";
+						}
+					?>
 				</div>
 			</div>
 		</div>
@@ -73,6 +128,8 @@
 				<form method="post">
 					<fieldset>
 						<legend>Create Announcement</legend>
+						<input type="hidden" name="action" value="create" required/><br>
+
 						<input type="text" name="title" placeholder="Title" required/><br>
 
 						<input type="date" name="date" class="half-width" required/>
@@ -119,21 +176,26 @@
 			</div>
 		</div>
 		<?php
-			$title = $con->real_escape_string($_REQUEST['title']);
-			$date = $con->real_escape_string($_REQUEST['date']);
-			$time = $con->real_escape_string($_REQUEST['time']);
-			$location = $con->real_escape_string($_REQUEST['location']);
-			$category = $con->real_escape_string($_REQUEST['category']);
-			$organization = $con->real_escape_string($_REQUEST['organization']);
-			$content = $con->real_escape_string($_REQUEST['description']);
+			$action = $con->real_escape_string($_REQUEST['action']);
+			if ($action == "create") {
+				$title = $con->real_escape_string($_REQUEST['title']);
+				$date = $con->real_escape_string($_REQUEST['date']);
+				$time = $con->real_escape_string($_REQUEST['time']);
+				$location = $con->real_escape_string($_REQUEST['location']);
+				$category = $con->real_escape_string($_REQUEST['category']);
+				$organization = $con->real_escape_string($_REQUEST['organization']);
+				$content = $con->real_escape_string($_REQUEST['description']);
 
-			$timestamp = date('Y-m-d H:i:s', strtotime($date . ' ' . $time));
+				$timestamp = date('Y-m-d H:i:s', strtotime($date . ' ' . $time));
 
-			$sql = "INSERT INTO Announcements (title, dateTime, location, content, category_id, topic_id) VALUES ('$title', '$timestamp', '$location', '$content', $category, $organization)";
+				$sql = "INSERT INTO Announcements (title, dateTime, location, content, category_id, topic_id) VALUES ('$title', '$timestamp', '$location', '$content', $category, $organization)";
 
-			echo "sql = " . $sql;
+				echo "sql = " . $sql;
 
-			$con->query($sql);
+				$con->query($sql);
+
+				echo "<meta http-equiv='refresh' content='0'>";
+			}
 		?>
 
 		<div class="settings-container form-container" id="settings-container">
@@ -158,8 +220,14 @@
 				echo "<script> window.location.assign('lisgarci.ocdsb.ca'); </script>";
 			}
 		?>
+
+		<script src="jquery-3.3.1.js"></script>
 		<script src="app.js"></script>
 		<script type="text/javascript">
+			//function addAnnouncement(title, date, month, category, topic, location, time) {
+			//	createAnnouncement(title, date, month, category, topic, location, time);
+			//}
+
 			function openCreate() {
 				document.getElementById('create-container').style.display = "block";
 			}

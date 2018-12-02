@@ -34,6 +34,6 @@ insert into Topic (Name) values ('Computer Science'), ('Badminton'), ('Curling')
 insert into Announcements (category_id, topic_id, Title, Location, Content, Datetime) values (1, 1, 'This is a test', 'Lisgar CI', 'This is a test announcement', now());
 */
 
-/*Sample query
-select ans.Title as title, cat.Name as category, top.Name as topic, ans.Location as location, ans.Content as content, date(ans.Datetime) as date from Announcements as ans, Category as cat, Topic as top where ans.id='1' and ans.category_id=cat.id and ans.topic_id=top.id order by ans.DatetimeAnnouncements;
-*/
+/*Sample query*/
+select ans.Title as title, cat.Name as category, top.Name as topic, ans.Location as location, ans.Content as content, date(ans.Datetime) as date, month(ans.Datetime) as month from Announcements as ans, Category as cat, Topic as top where ans.id='1' and ans.category_id=cat.id and ans.topic_id=top.id order by ans.DatetimeAnnouncements;
+/*/

@@ -14,17 +14,17 @@ let curMonth = 1;
 window.onload = function() {
 	monthClick();
 
-	createAnnouncement('lololo', 4, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
-	createAnnouncement('lololo', 5, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
-	createAnnouncement('lololo', 6, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
-	createAnnouncement('lololo', 6, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
-	createAnnouncement('lololo2', 5, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
-	createAnnouncement('lololo2', 7, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
-	createAnnouncement('lololo', 11, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
-	createAnnouncement('lololo', 15, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
-	createAnnouncement('lololo', 15, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
-	createAnnouncement('lololo', 17, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
-	createAnnouncement('lololo2', 31, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
+	// createAnnouncement('lololo', 4, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
+	// createAnnouncement('lololo', 5, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
+	// createAnnouncement('lololo', 6, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
+	// createAnnouncement('lololo', 6, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
+	// createAnnouncement('lololo2', 5, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
+	// createAnnouncement('lololo2', 7, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
+	// createAnnouncement('lololo', 11, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
+	// createAnnouncement('lololo', 15, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
+	// createAnnouncement('lololo', 15, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
+	// createAnnouncement('lololo', 17, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
+	// createAnnouncement('lololo2', 31, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
 
 	sortAnnouncement();
 	floatAnnouncements();
@@ -59,7 +59,7 @@ function sortAnnouncement() {
 			cardContainer.children[j].classList.add('visible');
 
 		if (cardContainer.children[j].classList[2] != curMonth) {
-			$(cardContainer.children[j]).hide('slow');
+			//$(cardContainer.children[j]).hide('slow');
 			// cardContainer.children[j].classList.remove('visible');
 		} else {
 			$(cardContainer.children[j]).show('slow');
@@ -132,6 +132,8 @@ function logInClick() {
 }
 
 function cancelLogInClick() {
+	if(!cancelLogInBtn) return;
+
 	cancelLogInBtn.onclick = function() {
 		// document.getElementById("log-in-container").style.top = "100%";
 		document.getElementById("log-in-container").style.display = "none";
@@ -154,7 +156,7 @@ function expandAnnouncement() {
 			title = this.children[2].innerText;
 			time = this.children[3].innerText;
 			room = this.children[4].innerText;
-			date = this.parentElement.classList[1];
+			date = this.parentElement.firstElementChild.innerText;
 			month = this.parentElement.classList[2];
 
 			expandable.innerHTML = `
@@ -164,11 +166,11 @@ function expandAnnouncement() {
 				<p class="card-info">${group}</p>
 
 				<h4>${title}</h4>
-				<p class="card-info">Date: ${months[month-1]} ${date}</p>
+				<p class="card-info">Date: ${months[curMonth - 1]} ${date}</p>
 				<p class="card-info">${time}</p>
 				<br>
 
-				<p class="card-info">Room ${room}</p>
+				<p class="card-info">${room}</p>
 				<br>
 
 				<p class="card-info">Description:</p>

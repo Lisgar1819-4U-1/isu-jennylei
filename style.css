@@ -297,7 +297,7 @@ input[type='button'], input[type='submit'] {
 	position: relative;
 	width: 45%;
 	margin: 0 2.5%;
-	display: none;
+	/*display: none;*/
 }
 
 .visible {
