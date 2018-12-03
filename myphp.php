@@ -34,7 +34,7 @@
 				<h1>LOG IN</h1>
 			</div>
 			<div class="float-left half flex">
-				<form method="post">
+				<form class="signIn-form" method="post">
 					<fieldset>
 						<legend>Sign in</legend>
 						<input type="email" name="email" placeholder="Email" required/><br>

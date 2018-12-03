@@ -37,10 +37,10 @@
 				<h1>CREATE ANNOUNCEMENT</h1>
 			</div>
 			<div class="float-left half flex">
-				<form method="post">
+				<form class="create-form" method="post">
 					<fieldset>
 						<legend>Create Announcement</legend>
-						<input type="hidden" name="action" value="create" required/><br>
+						<input type="hidden" name="action" value="create" required/>
 
 						<input type="text" name="title" placeholder="Title" required/><br>
 

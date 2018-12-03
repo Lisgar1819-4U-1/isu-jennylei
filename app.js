@@ -8,8 +8,8 @@ let overlay = document.getElementById('overlay');
 let closeOverlayBtn = document.getElementById('close-overlay');
 let cards = document.getElementsByClassName('card');
 
-let months = ['September', 'October', 'November', 'December', 'January', 'February', 'March', 'May', 'April', 'May', 'June', 'July', 'August'];
-let curMonth = 1;
+let months = ['January', 'February', 'March', 'May', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+let curMonth = 9;
 
 window.onload = function() {
 	monthClick();
@@ -40,7 +40,7 @@ function monthClick() {
 	for(let i = 0; i < monthBtn.length; i++) {
 
 		monthBtn[i].onclick = function() {
-			curMonth = i + 1;
+			curMonth = (i + 9) % 12;
 
 			for(let j = 0; j < monthBtn.length; j++) {
 				monthBtn[j].classList.remove("selected");
@@ -58,9 +58,8 @@ function sortAnnouncement() {
 	for	(let j = 0; j < cardContainer.children.length; j++) {
 			cardContainer.children[j].classList.add('visible');
 
-		if (cardContainer.children[j].classList[2] != curMonth) {
-			//$(cardContainer.children[j]).hide('slow');
-			// cardContainer.children[j].classList.remove('visible');
+		if (!cardContainer.children[j].classList.contains('month_' + curMonth)) {
+			$(cardContainer.children[j]).hide('slow');
 		} else {
 			$(cardContainer.children[j]).show('slow');
 		}
@@ -156,6 +155,7 @@ function expandAnnouncement() {
 			title = this.children[2].innerText;
 			time = this.children[3].innerText;
 			room = this.children[4].innerText;
+			content = this.children[5].innerText;
 			date = this.parentElement.firstElementChild.innerText;
 			month = this.parentElement.classList[2];
 
@@ -166,7 +166,7 @@ function expandAnnouncement() {
 				<p class="card-info">${group}</p>
 
 				<h4>${title}</h4>
-				<p class="card-info">Date: ${months[curMonth - 1]} ${date}</p>
+				<p class="card-info">Date: ${months[curMonth]} ${date}</p>
 				<p class="card-info">${time}</p>
 				<br>
 
@@ -174,7 +174,7 @@ function expandAnnouncement() {
 				<br>
 
 				<p class="card-info">Description:</p>
-				<p class="card-info" style="margin-left: 2em;">asdlhgf;alshhgll;hdlshkglhsa;glsgd</p>
+				<p class="card-info" style="margin-left: 2em;">${content}</p>
 			`;
 		}
 	}

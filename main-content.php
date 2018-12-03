@@ -1,9 +1,11 @@
 <div class="main-content" id="main-content">
-	<h3>September</h3>
+	<h3 id="month">September</h3>
 
 	<div class="card-container" id="card-container">
 		<?php
-			$result = $con->query("SELECT ans.Title as title, cat.Name as category, top.Name as topic, ans.Location as location, ans.Content as content, date(ans.Datetime) as date, day(ans.Datetime) as day, date_format(ans.Datetime, '%l:%i %p') as time from Announcements as ans, Category as cat, Topic as top where ans.category_id=cat.id and ans.topic_id=top.id order by day");
+			$result = $con->query("SELECT ann.Title as title, cat.Name as category, top.Name as topic, ann.Location as location, ann.Content as content, date(ann.Datetime) as date, day(ann.Datetime) as day, month(ann.Datetime) as month, date_format(ann.Datetime, '%l:%i %p') as time from Announcements as ann, Category as cat, Topic as top where ann.category_id=cat.id and ann.topic_id=top.id order by month, day, title");
+
+			echo $curMonth;
 
 			if ( $result->num_rows > 0 ){
 				// echo "<table border='1'>";
@@ -18,6 +20,8 @@
 					$location = $row["location"];
 					$time = $row["time"];
 					$day = $row["day"];
+					$month = $row["month"];
+					$content = $row["content"];
 
 					if ( $index <= $day ){
 						if ( $ended ){
@@ -26,7 +30,7 @@
 						}
 
 						echo '
-							<div class="dates">
+							<div class="dates month_' . $month . '">
 								<h4 class="date">' . $day . '</h4>';
 						$index++;
 						
@@ -40,6 +44,8 @@
 							<p class="card-title">' . $title . '</p>
 							<p class="card-info card-setting">' . $time . '</p>
 							<p class="card-info card-setting">' . $location . '</p>
+
+							<p class="card-info" style="display: none;">' . $content . '</p>
 						</div>';
 
 					// echo "<tr>";
