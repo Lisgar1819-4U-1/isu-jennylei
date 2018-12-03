@@ -7,16 +7,7 @@
 		<link rel="stylesheet" type="text/css" href="style.css">
 	</head>
 	<body>
-		<?php
-			//echo "DB connection test<br/>";
-
-			$con = new mysqli("127.0.0.1", "root", "root", "announcements");
-			if ($con->connect_error) {
-			die("DB Connection failed : " . $con->connect_error);
-			}
-
-			date_default_timezone_set('US/Eastern');
-		?>
+		<?php include 'setup.php'?>
 
 		<div class="color-strip"></div>
 
@@ -31,88 +22,9 @@
 		</div>
 
 		<div class="main-container">
-			<div class="side-bar" id="side-bar">
-				<ul>
-					<li class="selected month-btn">September</li>
-					<li class="month-btn">October</li>
-					<li class="month-btn">November</li>
-					<li class="month-btn">December</li>
-					<li class="month-btn">January</li>
-					<li class="month-btn">February</li>
-					<li class="month-btn">March</li>
-					<li class="month-btn">April</li>
-					<li class="month-btn">May</li>
-					<li class="month-btn">June</li>
-					<li class="month-btn">July</li>
-					<li class="month-btn">August</li>
-				</ul>
+			<?php include 'sidebar.php'?>
 
-				<div class="float-bottom">
-					Return to <a href="https://lisgarci.ocdsb.ca/">Lisgar CI</a>
-				</div>
-			</div>
-
-			<div class="main-content" id="main-content">
-				<h3>September</h3>
-
-				<div class="card-container" id="card-container">
-					<?php
-						$result = $con->query("SELECT ans.Title as title, cat.Name as category, top.Name as topic, ans.Location as location, ans.Content as content, date(ans.Datetime) as date, day(ans.Datetime) as day, date_format(ans.Datetime, '%l:%i %p') as time from Announcements as ans, Category as cat, Topic as top where ans.category_id=cat.id and ans.topic_id=top.id order by day");
-
-						if ( $result->num_rows > 0 ){
-							// echo "<table border='1'>";
-							// echo "<tr><th>Title</th><th>Category</th><th>Topic</th></tr>";
-
-							$index = 1;
-							$ended = false;
-							while($row = $result->fetch_assoc()){
-								$title = $row["title"];
-								$category = $row["category"];
-								$topic = $row["topic"];
-								$location = $row["location"];
-								$time = $row["time"];
-								$day = $row["day"];
-
-								if ( $index <= $day ){
-									if ( $ended ){
-										echo '</div>';
-										$ended = false;
-									}
-
-									echo '
-										<div class="dates">
-											<h4 class="date">' . $day . '</h4>';
-									$index++;
-									
-									$ended = true;
-								}
-
-								echo '
-									<div class="card">
-										<p class="card-info card-category border">' . $category . '</p>
-										<p class="card-info">' . $topic . '</p>
-										<p class="card-title">' . $title . '</p>
-										<p class="card-info card-setting">' . $time . '</p>
-										<p class="card-info card-setting">' . $location . '</p>
-									</div>';
-
-								// echo "<tr>";
-								// echo "<td>" . $row["title"] . "</td><td>" . $row["category"] . "</td><td>" . $row["topic"] . "</td>";
-								// echo "</tr>";
-							}
-	
-							if ( $ended ){
-								echo '</div>';
-								$ended = false;
-
-								$index++;
-							}
-
-							// echo "</table>";
-						}
-					?>
-				</div>
-			</div>
+			<?php include 'main-content.php'?>
 		</div>
 
 		<div class="overlay" id="overlay">
@@ -175,6 +87,7 @@
 				</form>
 			</div>
 		</div>
+
 		<?php
 			$action = $con->real_escape_string($_REQUEST['action']);
 			if ($action == "create") {
@@ -224,10 +137,6 @@
 		<script src="jquery-3.3.1.js"></script>
 		<script src="app.js"></script>
 		<script type="text/javascript">
-			//function addAnnouncement(title, date, month, category, topic, location, time) {
-			//	createAnnouncement(title, date, month, category, topic, location, time);
-			//}
-
 			function openCreate() {
 				document.getElementById('create-container').style.display = "block";
 			}
@@ -242,11 +151,6 @@
 
 			function closeSettings() {
 				document.getElementById('settings-container').style.display = "none";
-			}
-
-			function createNewGroup() {
-				document.getElementById('main-content').innerHTML += {
-				}
 			}
 		</script>
 	</body>
