@@ -40,7 +40,8 @@ function monthClick() {
 	for(let i = 0; i < monthBtn.length; i++) {
 
 		monthBtn[i].onclick = function() {
-			curMonth = (i + 9) % 12;
+			curMonth = (i + 9);
+			if(curMonth > 12) curMonth -= 12;
 
 			for(let j = 0; j < monthBtn.length; j++) {
 				monthBtn[j].classList.remove("selected");
@@ -56,12 +57,12 @@ function monthClick() {
 
 function sortAnnouncement() {
 	for	(let j = 0; j < cardContainer.children.length; j++) {
-			cardContainer.children[j].classList.add('visible');
-
-		if (!cardContainer.children[j].classList.contains('month_' + curMonth)) {
-			$(cardContainer.children[j]).hide('slow');
-		} else {
+		if (cardContainer.children[j].classList.contains('month_' + curMonth)) {
 			$(cardContainer.children[j]).show('slow');
+			cardContainer.children[j].classList.add('visible');
+		} else {
+			$(cardContainer.children[j]).hide('slow');
+			cardContainer.children[j].classList.remove('visible');
 		}
 	}
 }
@@ -197,8 +198,8 @@ function floatAnnouncements() {
 
 	for(let i = 0; i < cardContainer.children.length; i++) {
 		if (cardContainer.children[i].classList.contains('visible')) {
-			// cardContainer.children[i].classList.remove('col-1');
-			// cardContainer.children[i].classList.remove('col-2');
+			cardContainer.children[i].classList.remove('col-1');
+			cardContainer.children[i].classList.remove('col-2');
 
 			switch(float) {
 				case 0: {

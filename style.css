@@ -271,6 +271,10 @@ input[type='button'], input[type='submit'] {
 	margin: 10px 0;
 }
 
+.card-topic {
+	padding-left: 1em;
+}
+
 .card-info {
 	font-size: 0.9em;
 	margin: 2px 0;
@@ -304,21 +308,8 @@ input[type='button'], input[type='submit'] {
 }
 
 .visible {
-	display: block;
+	/*display: block;*/
 }
-
-/*
-.card:after {
-	content: "";
-	width: 30px;
-	height: 30px;
-	background: url("edit.png") no-repeat 0 0;
-	top: 50%;
-	transform: translateY(-50%);
-	right: 5px;
-	position: absolute;
-	display: inline-block;
-}*/
 
 /* OVERLAY */
 
@@ -384,7 +375,7 @@ input[type='button'], input[type='submit'] {
 	}
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 650px) {
 	.dates {
 		width: 100%;
 	}
