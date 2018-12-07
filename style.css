@@ -45,11 +45,11 @@ ul {
 	margin: 0;
 	padding: 0;
 	padding-left: 15%;
+	transition: padding-left 0.3s;
 }
 
 li {
 	letter-spacing: 1px;
-	margin: 0;
 	list-style: none;
 	position: relative;
 	line-height: 1.5em;
@@ -288,6 +288,7 @@ input[type='button'], input[type='submit'] {
 	letter-spacing: 2px;
 	font-size: 1.2em;
 	margin: 10px 0;
+	word-wrap: break-word;
 }
 
 .card-topic {
@@ -421,13 +422,13 @@ input[type='button'], input[type='submit'] {
 
 .filter-panel {
 	/*margin-right: 1em;*/
-	display: inline-block;
-	display: flex;
 }
 
 .filter-container {
 	margin: 5px 20px;
 	position: relative;
+	display: inline-block;
+	float: right;
 }
 
 .filter-content {
@@ -473,7 +474,17 @@ input[type='button'], input[type='submit'] {
 	padding-left: 16px;
 }
 
+@media screen and (max-width: 1000px) {
+	ul {
+		padding-left: 7%;
+	}
+}
+
 @media screen and (max-width: 900px) {
+	ul {
+		padding-left: 0;
+	}
+
 	.side-bar {
 		width: 162px;
 	}
