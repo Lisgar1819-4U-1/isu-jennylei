@@ -7,7 +7,7 @@ html, body {
 	padding: 0;
 	font-family: 'Lato', sans-serif;
 	font-weight: 300;
-	overflow: hidden;
+	/*overflow: hidden;*/
 }
 
 h1, h2, h3 {
@@ -136,9 +136,9 @@ li.selected:before {
 	align-items: center;
 }
 
-/* LOG IN MENU */
+/* FORMS MENU */
 
-.log-in-container, .form-container {
+.log-in-container {
 	display: none;
 	top: 0;
 	/*top: 100%;*/
@@ -152,7 +152,18 @@ li.selected:before {
 
 .signIn-form, .create-form {
 	font-size: 1.2em;
-	width: 70%;
+	/*width: 80%;*/
+	margin: 2em;
+}
+
+.create-container {
+	height: 100%;
+	display: flex;
+	align-items: center;
+}
+
+.form-group {
+	width: 100%;
 }
 
 fieldset {
@@ -186,7 +197,7 @@ input[type='button'], input[type='submit'] {
 }
 
 .half-width {
-	width: 45%;
+	width: 47%;
 }
 
 /* MAIN CONTAINER */
@@ -253,6 +264,7 @@ input[type='button'], input[type='submit'] {
 	width: 100%;
 	padding: 10px 20px;
 	z-index: 51;
+	overflow: scroll;
 }
 
 .card {
@@ -447,6 +459,11 @@ input[type='button'], input[type='submit'] {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+.filter-text {
+	padding: 0;
+	margin: 0;
 }
 
 .filter-button>img {

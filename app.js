@@ -11,6 +11,7 @@ let editBtn = document.getElementsByClassName('edit-btn');
 
 let months = ['January', 'February', 'March', 'May', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 let curMonth = 9;
+let curFilter = ['none', 'none'];
 
 window.onload = function() {
 	monthClick();
@@ -35,7 +36,8 @@ window.onload = function() {
 	cancelLogInClick();
 	expandAnnouncement();
 	overlayClick();
-	filterClick();
+	filterBtnClick();
+	// filterElementClick();
 	// closeClick();
 }
 
@@ -54,6 +56,8 @@ function monthClick() {
 			mainContent.getElementsByTagName("h3")[0].innerText = this.innerText;
 
 			sortAnnouncement();
+			resetFilter();
+			floatAnnouncements();
 		}
 	}
 }
@@ -61,10 +65,10 @@ function monthClick() {
 function sortAnnouncement() {
 	for	(let j = 0; j < cardContainer.children.length; j++) {
 		if (cardContainer.children[j].classList.contains('month_' + curMonth)) {
-			$(cardContainer.children[j]).show('slow');
+			$(cardContainer.children[j]).show('fast');
 			cardContainer.children[j].classList.add('visible');
 		} else {
-			$(cardContainer.children[j]).hide('slow');
+			$(cardContainer.children[j]).hide('fast');
 			cardContainer.children[j].classList.remove('visible');
 		}
 	}
@@ -200,10 +204,10 @@ function floatAnnouncements() {
 	let float = 0;
 
 	for(let i = 0; i < cardContainer.children.length; i++) {
-		if (cardContainer.children[i].classList.contains('visible')) {
-			cardContainer.children[i].classList.remove('col-1');
-			cardContainer.children[i].classList.remove('col-2');
+		cardContainer.children[i].classList.remove('col-1');
+		cardContainer.children[i].classList.remove('col-2');
 
+		if (cardContainer.children[i].classList.contains('visible')) {
 			switch(float) {
 				case 0: {
 					cardContainer.children[i].classList.add('col-1');
@@ -220,19 +224,93 @@ function floatAnnouncements() {
 	}
 }
 
-function filterClick() {
-	let filters = document.getElementsByClassName('filter-button');
+function filterBtnClick() {
+	let filterBtn = document.getElementsByClassName('filter-button');
 
-	for (let i = 0; i < filters.length; i++) {
-		filters[i].onclick = function() {
+	for (let i = 0; i < filterBtn.length; i++) {
+		filterBtn[i].onclick = function() {
 			let content = this.nextElementSibling;
 
-			if(!content.style.display || content.style.display == 'none')
+			if(getComputedStyle(content).display == 'none')
 				$(content).show('fast');
 			else
 				$(content).hide('fast');
+
+			// if (curFilter[i] != this.classList[1]) {
+				// curFilter[i] = this.classList[1];
+				filterElementClick(this, this.classList[1]);
+			// }
 		}
 	}
+}
+
+function filterElementClick(filter, type) {
+	let filterElements = document.getElementsByClassName('filter-element');
+
+	for (let i = 0; i < filterElements.length; i++) {
+		filterElements[i].onclick = function() {
+			if (this.innerText == 'None') {
+				filter.firstElementChild.innerText = type;
+				$(this.parentElement).hide('fast');
+				resetFilter();
+			} else {
+				sortAnnouncement();
+				filter.firstElementChild.innerText = this.innerText + " ";
+				$(this.parentElement).hide('fast');
+				addFilter(this.innerText);
+			}
+		}
+	}
+}
+
+function addFilter(filter) {
+	for (let i = 0; i < cards.length; i++) {
+		if (!cards[i].classList.contains('hidden-card')) {
+			if(!(cards[i].firstElementChild.innerHTML == filter || cards[i].children[1].innerHTML == filter)) {
+				$(cards[i]).hide('fast');
+				cards[i].classList.add('hidden-card');
+			} else {
+				$(cards[i]).show('fast');
+				cards[i].classList.remove('hidden-card');
+			}
+		}
+	}
+
+	let dates = cardContainer.children;
+	let visible = false;
+
+	for (let i = 0; i < dates.length; i++) {
+		visible = false;
+
+		if (dates[i].classList.contains('visible')){
+			for (let j = 1; j < dates[i].children.length; j++) {
+				if (!dates[i].children[j].classList.contains('hidden-card')) {
+					visible = true;
+					break;
+				}
+			}
+
+			if (!visible) {
+				$(dates[i]).hide('fast');
+				dates[i].classList.remove('visible');
+			}
+		}
+	}
+
+	floatAnnouncements();
+}
+
+function resetFilter() {
+	// curFilter[0] = 'none';
+	// curFilter[1] = 'none';
+
+	for (let i = 0; i < cards.length; i++) {
+		$(cards[i]).show('fast');
+		cards[i].classList.remove('hidden-card');
+	}
+
+	sortAnnouncement();
+	floatAnnouncements();
 }
 
 function editClick() {
