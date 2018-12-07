@@ -1,4 +1,16 @@
 <div class="main-content" id="main-content">
+	<?php
+		if (basename($_SERVER["REQUEST_URI"], ".php") == 'admin') $isAdmin = true;
+	?>
+
+	<div class="no-content" id="no-content">
+		<h2>No announcements for this month!</h2>
+		<?php
+			if ($isAdmin)
+				echo '<a href="create.php">Create announcement</a>';
+		?>
+	</div>
+
 	<div class="header-panel">
 		<h3 id="month">September</h3>
 
@@ -47,9 +59,7 @@
 
 	<div class="card-container" id="card-container">
 		<?php
-			$result = $con->query("SELECT ann.Id as id, ann.Title as title, cat.Name as category, top.Name as topic, ann.Location as location, ann.Content as content, date(ann.Datetime) as date, day(ann.Datetime) as day, month(ann.Datetime) as month, date_format(ann.Datetime, '%l:%i %p') as time from Announcements as ann, Category as cat, Topic as top where ann.category_id=cat.id and ann.topic_id=top.id order by month, day, title");
-
-			if (basename($_SERVER["REQUEST_URI"], ".php") == 'admin') $isAdmin = true;
+			$result = $con->query("SELECT ann.Id as id, ann.Title as title, cat.Name as category, top.Name as topic, ann.Location as location, ann.Content as content, date(ann.Datetime) as date, day(ann.Datetime) as day, month(ann.Datetime) as month, year(ann.Datetime) as year, date_format(ann.Datetime, '%l:%i %p') as time from Announcements as ann, Category as cat, Topic as top where ann.category_id=cat.id and ann.topic_id=top.id order by month, day, title");
 
 			if ( $result->num_rows > 0 ){
 				// echo "<table border='1'>";
@@ -68,8 +78,11 @@
 					$time = $row["time"];
 					$day = $row["day"];
 					$month = $row["month"];
+					$year = $row["year"];
 					$content = $row["content"];
 					// echo "is" . $day . " = " . $prevDate;
+					if ($year != date("Y")) continue;
+
 					if ( $day != $prevDate || $month != $prevMonth ){
 						if ( $ended ){
 							echo '</div>';

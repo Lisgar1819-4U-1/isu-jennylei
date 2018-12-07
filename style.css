@@ -7,7 +7,7 @@ html, body {
 	padding: 0;
 	font-family: 'Lato', sans-serif;
 	font-weight: 300;
-	/*overflow: hidden;*/
+	overflow: hidden;
 }
 
 h1, h2, h3 {
@@ -233,8 +233,7 @@ input[type='button'], input[type='submit'] {
 }
 
 .main-content {
-	padding: 15px;
-	padding-top: 0;
+	padding: 15px 0 0 0;
 	box-sizing: border-box;
 	position: relative;
 	height: 100%;
@@ -243,19 +242,24 @@ input[type='button'], input[type='submit'] {
 }
 
 .no-content {
-	height: 90%;
+	/*display: none;*/
+	height: 100%;
 	width: 100%;
 	text-align: center;
-	position: relative;
+	position: absolute;
+	top: 0;
 	background-image: url("circle.svg");
 	background-repeat: no-repeat;
-	background-position: center
+	background-position: center;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /*line-height: 1.5em;*/
 }
 
 .no-content>h2 {
-	position: relative;
-	top: 50%;
-	transform: translateY(-50%);
+	margin-bottom: 0.5em;
 }
 
 .card-container {
@@ -263,6 +267,7 @@ input[type='button'], input[type='submit'] {
 	height: 90%;
 	width: 100%;
 	padding: 10px 20px;
+	/*margin: 0 20px 10px 0;*/
 	z-index: 51;
 	overflow: scroll;
 }
@@ -322,10 +327,6 @@ input[type='button'], input[type='submit'] {
 	/*display: none;*/
 }
 
-.visible {
-	/*display: block;*/
-}
-
 .edit-btn>svg {
 	width: 1em;
 	height: 1em;
@@ -363,7 +364,8 @@ input[type='button'], input[type='submit'] {
 }
 
 .expandable {
-	height: 0;
+	/*display: inline-table;*/
+	max-height: 0;
 	width: 0;
 	top: 50%;
 	left: 50%;
@@ -397,7 +399,7 @@ input[type='button'], input[type='submit'] {
 }
 
 .half-screen {
-	height: 50%;
+	max-height: 80%;
 	width: 50%;
 }
 
