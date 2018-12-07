@@ -112,7 +112,7 @@
 					<input type="text" name="description" <?php if (strlen($description) > 0){?>value="<?=$description?>"<?php } else { ?>placeholder="Description"<?php } ?>/>
 
 					<input type="submit" value="<?php if (strlen($id) > 0){?>Modify<?php } else { ?>Create<?php } ?>">
-					<input type="button" value="Cancel" onclick="closeCreate()">
+					<input type="button" value="Cancel" onclick="returnToAdmin()">
 				</fieldset>
 			</form>
 		</div>
@@ -120,27 +120,35 @@
 
 	<?php
 	if (strlen($action) > 0) {
-			$title = $con->real_escape_string($_REQUEST['title']);
-			$date = $con->real_escape_string($_REQUEST['date']);
-			$time = $con->real_escape_string($_REQUEST['time']);
-			$location = $con->real_escape_string($_REQUEST['location']);
-			$category = $con->real_escape_string($_REQUEST['category']);
-			$organization = $con->real_escape_string($_REQUEST['organization']);
-			$content = $con->real_escape_string($_REQUEST['description']);
+		$title = $con->real_escape_string($_REQUEST['title']);
+		$date = $con->real_escape_string($_REQUEST['date']);
+		$time = $con->real_escape_string($_REQUEST['time']);
+		$location = $con->real_escape_string($_REQUEST['location']);
+		$category = $con->real_escape_string($_REQUEST['category']);
+		$organization = $con->real_escape_string($_REQUEST['organization']);
+		$content = $con->real_escape_string($_REQUEST['description']);
 
-			$timestamp = date('Y-m-d H:i:s', strtotime($date . ' ' . $time));
+		$timestamp = date('Y-m-d H:i:s', strtotime($date . ' ' . $time));
 
-			if (strlen($id) > 0 && $action == "modify")
-				$sql = "UPDATE Announcements set title='" . $title . "', dateTime='" . $timestamp . "', location='" . $location . "', content='". $content . "', category_id='" . $category . "', topic_id='" . $organization. "' WHERE id=" . $id;
-			else
-				$sql = "INSERT INTO Announcements (title, dateTime, location, content, category_id, topic_id) VALUES ('$title', '$timestamp', '$location', '$content', $category, $organization)";
-				
-			echo "sql = " . $sql;
+		if (strlen($id) > 0 && $action == "modify")
+			$sql = "UPDATE Announcements set title='" . $title . "', dateTime='" . $timestamp . "', location='" . $location . "', content='". $content . "', category_id='" . $category . "', topic_id='" . $organization. "' WHERE id=" . $id;
+		else
+			$sql = "INSERT INTO Announcements (title, dateTime, location, content, category_id, topic_id) VALUES ('$title', '$timestamp', '$location', '$content', $category, $organization)";
+			
+		echo "sql = " . $sql;
 
-			$con->query($sql);
+		$con->query($sql);
 
-			echo "<meta http-equiv='refresh' content='0'>";
-		}
+		// echo "<meta http-equiv='refresh' content='0'>";
+		echo "<script> window.location.assign('admin.php'); </script>";
+	}
 	?>
+
+	<script type="text/javascript">
+		function returnToAdmin() {
+			window.location = 'admin.php';
+		}
+	</script>
+
 </body>
 </html>
