@@ -137,20 +137,7 @@ li.selected:before {
 }
 
 /* FORMS MENU */
-
-.log-in-container {
-	display: none;
-	top: 0;
-	/*top: 100%;*/
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	background-color: white;
-	z-index: 100;
-	transition: 0.5s;
-}
-
-.signIn-form, .create-form {
+.create-form {
 	font-size: 1.2em;
 	/*width: 80%;*/
 	margin: 2em;

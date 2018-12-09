@@ -146,7 +146,7 @@ function logInClick() {
 
 	logInBtn.onclick = function() {
 		// document.getElementById("log-in-container").style.top = 0;
-		document.getElementById("log-in-container").style.display = "block";
+		window.location.href='protected/admin.php';
 	}
 }
 

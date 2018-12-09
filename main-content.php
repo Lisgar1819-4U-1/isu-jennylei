@@ -18,7 +18,7 @@
 			<div class="filter-container" id="filter-category">
 				<div class="filter-button Category">
 					<p class="filter-text">Category</p>
-					<img src="edit.svg"/>
+					<!-- <img src="edit.svg"/> -->
 				</div>
 				<div class="filter-content">
 				<?php
@@ -38,7 +38,7 @@
 			<div class="filter-container" id="filter-topic">
 				<div class="filter-button Topic">
 					<p class="filter-text">Topic</p>
-					<img src="edit.svg"/>
+					<!-- <img src="edit.svg"/> -->
 				</div>
 				<div class="filter-content">
 				<?php
