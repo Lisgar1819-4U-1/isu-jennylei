@@ -11,34 +11,18 @@ let editBtn = document.getElementsByClassName('edit-btn');
 
 let months = ['January', 'February', 'March', 'May', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 let curMonth = 9;
-let curFilter = ['none', 'none'];
+let curFilter = ['None', 'None'];
 
 window.onload = function() {
 	monthClick();
 
-	// createAnnouncement('lololo', 4, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
-	// createAnnouncement('lololo', 5, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
-	// createAnnouncement('lololo', 6, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
-	// createAnnouncement('lololo', 6, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
-	// createAnnouncement('lololo2', 5, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
-	// createAnnouncement('lololo2', 7, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
-	// createAnnouncement('lololo', 11, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
-	// createAnnouncement('lololo', 15, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
-	// createAnnouncement('lololo', 15, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
-	// createAnnouncement('lololo', 17, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
-	// createAnnouncement('lololo2', 31, 1, 'contests', 'lisgar musical production', '251', '12:00 am');
-
 	sortAnnouncement();
 	floatAnnouncements();
 
-	editClick();
 	logInClick();
-	cancelLogInClick();
 	expandAnnouncement();
 	overlayClick();
 	filterBtnClick();
-	// filterElementClick();
-	// closeClick();
 }
 
 function monthClick() {
@@ -78,13 +62,12 @@ function sortAnnouncement() {
 	}
 
 	if (numVisible <= 0 && (curFilter[0] == 'none' && curFilter[1] == 'none')) {
-		// console.log($('#no-content'));
 		$('#no-content').show('slow');
 	} else {
 		$('#no-content').hide('slow');
 	}
-	// console.log(numVisible);
 }
+
 
 function createAnnouncement(title, date, month, category, group, room, time) {
 	console.log(date);
@@ -119,46 +102,12 @@ function createDate(date, month) {
 		</div>`;
 }
 
-/*
-	Announcement information
-
-	Title
-	Date
-	Time
-	Category
-	Group
-*/
-function createCard(num, title, date, month, category, group, room, time) {
-	cardContainer.children[num].innerHTML += `
-		<div class="card">
-			<p class="card-info card-category border">${category}</p>
-			<p class="card-info">${group}</p>
-
-			<p class="card-title">${title}</p>
-
-			<p class="card-info card-setting">${time}</p>
-			<p class="card-info card-setting">Room ${room}</p>
-		</div>`;
-}
-
 function logInClick() {
 	if (!logInBtn) return;
 
 	logInBtn.onclick = function() {
 		// document.getElementById("log-in-container").style.top = 0;
 		window.location.href='protected/admin.php';
-	}
-}
-
-function cancelLogInClick() {
-	if(!cancelLogInBtn) return;
-
-	cancelLogInBtn.onclick = function() {
-		// document.getElementById("log-in-container").style.top = "100%";
-		document.getElementById("log-in-container").style.display = "none";
-
-		document.getElementsByName('email')[0].value = "";
-		document.getElementsByName('password')[0].value = "";
 	}
 }
 
@@ -248,42 +197,41 @@ function filterBtnClick() {
 			else
 				$(content).hide('slow');
 
-			// if (curFilter[i] != this.classList[1]) {
-				// curFilter[i] = this.classList[1];
-				filterElementClick(this, this.classList[1]);
-			// }
+			filterElementClick(i, this, this.classList[1]);
 		}
 	}
 }
 
-function filterElementClick(filter, type) {
-	let filterElements = document.getElementsByClassName('filter-element');
+function filterElementClick(filterIndex, filter, type) {
+	let filterElements = filter.parentElement.children[1].children;
 
 	for (let i = 0; i < filterElements.length; i++) {
 		filterElements[i].onclick = function() {
-			if (this.innerText == 'None') {
+			$(this.parentElement).hide('slow');
+			
+			if (this.innerText == curFilter[filterIndex]){
+				return;
+			}
+
+			curFilter[filterIndex] = this.innerText;
+
+			resetFilter();
+
+			if (curFilter[filterIndex] == 'None') {
 				filter.firstElementChild.innerText = type;
-				$(this.parentElement).hide('slow');
-				resetFilter();
 			} else {
-				sortAnnouncement();
-				filter.firstElementChild.innerText = this.innerText + " ";
-				$(this.parentElement).hide('slow');
-				addFilter(this.innerText);
+				filter.firstElementChild.innerText = this.innerText;
+				addFilter();
 			}
 		}
 	}
 }
 
-function addFilter(filter) {
+function addFilter() {
 	for (let i = 0; i < cards.length; i++) {
-		if (!cards[i].classList.contains('hidden-card')) {
-			if(!(cards[i].firstElementChild.innerHTML == filter || cards[i].children[1].innerHTML == filter)) {
-				$(cards[i]).hide('slow');
+		if (!cards[i].classList.contains('hidden-card') && cards[i].parentElement.classList.contains('visible')) {
+			if(!(cards[i].classList.contains(curFilter[0]) && cards[i].classList.contains(curFilter[1]))) {
 				cards[i].classList.add('hidden-card');
-			} else {
-				$(cards[i]).show('slow');
-				cards[i].classList.remove('hidden-card');
 			}
 		}
 	}
@@ -299,6 +247,8 @@ function addFilter(filter) {
 				if (!dates[i].children[j].classList.contains('hidden-card')) {
 					visible = true;
 					break;
+				} else {
+					$(dates[i].children[j]).hide('fast');
 				}
 			}
 
@@ -313,8 +263,8 @@ function addFilter(filter) {
 }
 
 function resetFilter() {
-	// curFilter[0] = 'none';
-	// curFilter[1] = 'none';
+	curFilter[0] = 'None';
+	curFilter[1] = 'None';
 
 	for (let i = 0; i < cards.length; i++) {
 		$(cards[i]).show('slow');
@@ -323,14 +273,4 @@ function resetFilter() {
 
 	sortAnnouncement();
 	floatAnnouncements();
-}
-
-function editClick() {
-	for (let i = 0; i < editBtn.length; i++) {
-		$(editBtn[i]).click(function(e) {
-			e.stopPropagation();
-			// expandEdit(this);
-			console.log(this);
-		});
-	}
 }

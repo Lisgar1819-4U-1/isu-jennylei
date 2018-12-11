@@ -2,14 +2,14 @@
 
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="../style.css">
 </head>
 
 <body>
 	<div class="color-strip"></div>
 
 	<?php
-		include 'setup.php';
+		include '../setup.php';
 
 		$id = $_GET['id'];
 		if (strlen($id) == 0) $id = $_REQUEST['id'];
@@ -112,6 +112,13 @@
 					<input type="text" name="description" <?php if (strlen($description) > 0){?>value="<?=$description?>"<?php } else { ?>placeholder="Description"<?php } ?>/>
 
 					<input type="submit" value="<?php if (strlen($id) > 0){?>Modify<?php } else { ?>Create<?php } ?>">
+					<?php if (strlen($id) > 0){?> <input type="submit" name="delete" value="Delete"> <?php } 
+						if (isset($_POST['delete'])) {
+							$sql = "DELETE from announcements where announcements.id = " . $id;
+
+							$con->query($sql);
+						}
+					?>
 					<input type="button" value="Cancel" onclick="returnToAdmin()">
 				</fieldset>
 			</form>

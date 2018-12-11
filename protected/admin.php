@@ -48,7 +48,7 @@
 		<script src="../app.js"></script>
 		<script type="text/javascript">
 			//Detect the current browser type.
-			var isIE = /*@cc_on!@*/false || !!document.documentMode;
+			var isIE = false || !!document.documentMode;
 			var isEdge = !isIE && !!window.StyleMedia;
 			if(navigator.userAgent.indexOf("Chrome") != -1 && !isEdge)
 			{

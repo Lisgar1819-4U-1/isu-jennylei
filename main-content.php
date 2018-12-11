@@ -97,7 +97,7 @@
 					}
 
 					echo '
-						<div class="card">
+						<div class="card ' . $category . ' ' . $topic . ' None">
 							<p class="card-info card-category border">' . $category . '</p>
 							<p class="card-info card-topic" style="display:inline-block;">' . $topic . '</p>
 							<p class="card-title">' . $title . '</p>
