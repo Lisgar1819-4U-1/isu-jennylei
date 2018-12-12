@@ -25,30 +25,38 @@ window.onload = function() {
 	filterBtnClick();
 }
 
+// Adds the class selected to the month item clicked
 function monthClick() {
 	for(let i = 0; i < monthBtn.length; i++) {
-
 		monthBtn[i].onclick = function() {
 			curMonth = (i + 9);
 			if(curMonth > 12) curMonth -= 12;
 
+			// Removes class from all list items first
 			for(let j = 0; j < monthBtn.length; j++) {
 				monthBtn[j].classList.remove("selected");
 			}
+
+			// Adds class to clicked list item
 			this.classList.add("selected");
 
 			document.getElementById("month-title").innerText = this.innerText;
 
-			// sortAnnouncement();
+			// Resets filters
+			curFilter[0] = 'None';
+			curFilter[1] = 'None';
 			resetFilter();
+			
 			floatAnnouncements();
 		}
 	}
 }
 
+// Sorts announcements based on current month
 function sortAnnouncement() {
 	let numVisible = cardContainer.children.length;
 
+	// If the date is part of the current month then set as visible, if not then invisible
 	for	(let j = 0; j < cardContainer.children.length; j++) {
 		if (cardContainer.children[j].classList.contains('month_' + curMonth)) {
 			$(cardContainer.children[j]).show('slow');
@@ -61,6 +69,7 @@ function sortAnnouncement() {
 		}
 	}
 
+	// Display note if no announcements for corresponding month
 	if (numVisible <= 0 && (curFilter[0] == 'None' && curFilter[1] == 'None')) {
 		$('#no-content').show('slow');
 	} else {
@@ -68,66 +77,36 @@ function sortAnnouncement() {
 	}
 }
 
-
-function createAnnouncement(title, date, month, category, group, room, time) {
-	console.log(date);
-	let index = 0;
-	let exists = false;
-
-	if (cardContainer.children.length == 0) {
-		exists = false;
-	} else {
-		for (let i = 0; i < cardContainer.children.length; i++) {
-			if (cardContainer.children[i].classList[1] == date && cardContainer.children[i].classList[2] == month) {
-				index = i;
-				exists = true;
-				console.log(date + ': ' + index);
-			}
-		}
-	}
-
-	if (!exists) {
-		createDate(date, month);
-		index = cardContainer.children.length - 1;
-	}
-
-	console.log(date + ": " + index);
-	createCard(index, title, date, month, category, group, room, time);
-}
-
-function createDate(date, month) {
-	cardContainer.innerHTML += `
-		<div class="dates ${date} ${month}">
-			<h4 class="date">${date}</h4>
-		</div>`;
-}
-
+// Redirects to admin page
 function logInClick() {
 	if (!logInBtn) return;
 
 	logInBtn.onclick = function() {
-		// document.getElementById("log-in-container").style.top = 0;
 		window.location.href='protected/admin.php';
 	}
 }
 
+// Expands the overlay
 function openOverlay() {
 		expandable.classList.add('half-screen');
 		expandable.classList.remove('no-padding');
 		overlay.classList.add('full-screen');
 }
 
+// Closes the overlay
 function closeOverlay() {
 	expandable.classList.remove('half-screen');
 	expandable.classList.add('no-padding');
 	overlay.classList.remove('full-screen');
 }
 
+// Updates overlay content to show announcement information
 function expandAnnouncement() {
 	for(let i = 0; i < cards.length; i++) {
 		cards[i].onclick = function() {
 			openOverlay();
 
+			// Gets announcement information from clicked card
 			category = this.children[0].innerText;
 			group = this.children[1].innerText;
 			title = this.children[2].innerText;
@@ -137,6 +116,7 @@ function expandAnnouncement() {
 			date = this.parentElement.firstElementChild.innerText;
 			month = this.parentElement.classList[2];
 
+			// Updates content
 			expandable.innerHTML = `
 				<div class="close-overlay" id="close-overlay" onclick="closeOverlay()">&#10005;</div>
 
@@ -158,12 +138,14 @@ function expandAnnouncement() {
 	}
 }
 
+// Closes overlay when it is clicked
 function overlayClick() {
 	overlay.onclick = function() {
 		closeOverlay();
 	}
 }
 
+// Aligns the announcements into 2 columns
 function floatAnnouncements() {
 	let float = 0;
 
@@ -188,6 +170,7 @@ function floatAnnouncements() {
 	}
 }
 
+// Displays filter dropdown when button clicked
 function filterBtnClick() {
 	let filterBtn = document.getElementsByClassName('filter-button');
 
@@ -205,6 +188,7 @@ function filterBtnClick() {
 	}
 }
 
+// Checks if any filter options are clicked, if yes then set filter
 function filterElementClick(filterIndex, filter, type) {
 	let filterElements = filter.parentElement.children[1].children;
 
@@ -212,6 +196,7 @@ function filterElementClick(filterIndex, filter, type) {
 		filterElements[i].onclick = function() {
 			$(this.parentElement).hide('slow');
 			
+			// Stops if the filter is already active
 			if (this.innerText == curFilter[filterIndex]){
 				return;
 			}
@@ -219,8 +204,8 @@ function filterElementClick(filterIndex, filter, type) {
 			curFilter[filterIndex] = this.innerText;
 
 			resetFilter();
-	console.log('asd');
 
+			// Sets filter
 			if (curFilter[filterIndex] == 'None') {
 				filter.firstElementChild.innerText = type;
 			} else {
@@ -231,7 +216,9 @@ function filterElementClick(filterIndex, filter, type) {
 	}
 }
 
+// Adds filter to currently visible cards
 function addFilter() {
+	// Loops through all cards and adds class for non-visible cards
 	for (let i = 0; i < cards.length; i++) {
 		if (!cards[i].classList.contains('hidden-card') && cards[i].parentElement.classList.contains('visible')) {
 			if(!(cards[i].classList.contains(curFilter[0]) && cards[i].classList.contains(curFilter[1]))) {
@@ -243,6 +230,7 @@ function addFilter() {
 	let dates = cardContainer.children;
 	let visible = false;
 
+	// Loops through all announcements of a certain date to check if any are visible, if no visible cards then date is invisible too
 	for (let i = 0; i < dates.length; i++) {
 		visible = false;
 
@@ -263,13 +251,12 @@ function addFilter() {
 		}
 	}
 
+	// Realigns announcements
 	floatAnnouncements();
 }
 
+// Removes hidden class on cards and redisplays announcements based on month
 function resetFilter() {
-	// curFilter[0] = 'None';
-	// curFilter[1] = 'None';
-
 	for (let i = 0; i < cards.length; i++) {
 		$(cards[i]).show('slow');
 		cards[i].classList.remove('hidden-card');

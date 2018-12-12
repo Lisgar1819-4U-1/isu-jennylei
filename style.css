@@ -245,7 +245,7 @@ option {
 }
 
 .no-content {
-	/*display: none;*/
+	display: none;
 	height: 100%;
 	width: 100%;
 	text-align: center;
@@ -328,7 +328,7 @@ option {
 .dates {
 	z-index: 50;
 	position: relative;
-	width: 45%;
+	width: 43%;
 	margin: 0 2.5%;
 	/*display: none;*/
 }
