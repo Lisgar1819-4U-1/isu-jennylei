@@ -17,6 +17,7 @@ h1, h2, h3 {
 }
 
 h1 {
+	font-size: 2em;
 	letter-spacing: 2px;
 	font-weight: normal;
 }
@@ -176,9 +177,6 @@ input, select {
 	margin: 15px 0;
 	width: 100%;
 	box-sizing: border-box;
-}
-
-input, select {
 	border-left: 3px solid rgb(49, 74, 114);
 }
 
@@ -195,6 +193,11 @@ input[type='button'], input[type='submit'] {
 
 option {
 	cursor: pointer;
+}
+
+.invalid {
+	border: 1px solid red;
+	border-left: 3px solid rgb(49, 74, 114);
 }
 
 /* MAIN CONTAINER */
@@ -475,34 +478,4 @@ option {
 .filter-button>img {
 	max-height: 1em;
 	padding-left: 16px;
-}
-
-@media screen and (max-width: 1000px) {
-	ul {
-		padding-left: 7%;
-	}
-}
-
-@media screen and (max-width: 900px) {
-	ul {
-		padding-left: 0;
-	}
-
-	.side-bar {
-		width: 162px;
-	}
-
-	.main-content {
-		width: calc(100% - 162px);
-	}
-}
-
-@media screen and (max-width: 650px) {
-	.dates {
-		width: 100%;
-	}
-
-	.col-1, .col-2 {
-		float: left;
-	}
 }

@@ -3,6 +3,7 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="../style.css">
+	<link rel="stylesheet" type="text/css" href="../media-query.css">
 </head>
 
 <body>
@@ -50,7 +51,7 @@
 			<h2>CREATE ANNOUNCEMENT</h2>
 		</div>
 		<div class="half flex">
-			<form class="create-form" method="post">
+			<form class="create-form" id="create-form" method="post">
 				<fieldset>
 					<legend>Create Announcement</legend>
 					
@@ -65,10 +66,14 @@
 			
 					<?php }	?>
 
-					<input type="text" name="title" <?php if (strlen($title) > 0){?>value="<?=$title?>"<?php } else { ?>placeholder="Title"<?php } ?> required/><br>
+					<input type="text" name="title" <?php if (strlen($title) > 0){?>value="<?=$title?>"<?php } else { ?>placeholder="Title"<?php } ?> required/>
+
+					<br>
 
 					<input type="date" name="date" <?php if (strlen($date) > 0){?>value="<?=$date?>"<?php }?> class="half-width" required/>
-					<input type="time" name="time" <?php if (strlen($time) > 0){?>value="<?=$time?>:00"<?php }?> class="half-width float-right"/><br>
+					<input type="time" name="time" <?php if (strlen($time) > 0){?>value="<?=$time?>:00"<?php }?> class="half-width float-right"/>
+
+					<br>
 
 					<input type="text" name="location" <?php if (strlen($location) > 0){?>value="<?=$location?>"<?php } else { ?>placeholder="Location"<?php } ?>/>
 
@@ -111,7 +116,7 @@
 
 					<input type="text" name="description" <?php if (strlen($description) > 0){?>value="<?=$description?>"<?php } else { ?>placeholder="Description"<?php } ?>/>
 
-					<input type="submit" value="<?php if (strlen($id) > 0){?>Modify<?php } else { ?>Create<?php } ?>">
+					<input type="submit" id="submit-create-form" value="<?php if (strlen($id) > 0){?>Modify<?php } else { ?>Create<?php } ?>">
 					<?php if (strlen($id) > 0){?> <input type="submit" name="delete" value="Delete"> <?php } 
 						if (isset($_POST['delete'])) {
 							$sql = "DELETE from announcements where announcements.id = " . $id;
@@ -147,7 +152,7 @@
 		$con->query($sql);
 
 		// echo "<meta http-equiv='refresh' content='0'>";
-		echo "<script> window.location.assign('admin.php'); </script>";
+		// echo "<script> window.location.assign('admin.php'); </script>";
 	}
 	?>
 
@@ -171,6 +176,7 @@
 		}
 	?>
 
+	<!-- <script src="../form-validation.js"></script> -->
 	<script type="text/javascript">
 		function returnToAdmin() {
 			window.location = 'admin.php';

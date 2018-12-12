@@ -37,7 +37,7 @@ function monthClick() {
 			}
 			this.classList.add("selected");
 
-			mainContent.getElementsByTagName("h3")[0].innerText = this.innerText;
+			document.getElementById("month-title").innerText = this.innerText;
 
 			// sortAnnouncement();
 			resetFilter();
@@ -61,7 +61,7 @@ function sortAnnouncement() {
 		}
 	}
 
-	if (numVisible <= 0 && (curFilter[0] == 'none' && curFilter[1] == 'none')) {
+	if (numVisible <= 0 && (curFilter[0] == 'None' && curFilter[1] == 'None')) {
 		$('#no-content').show('slow');
 	} else {
 		$('#no-content').hide('slow');

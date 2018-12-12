@@ -12,7 +12,7 @@
 	</div>
 
 	<div class="header-panel">
-		<h4 id="month">September</h4>
+		<h4 id="month-title">September</h4>
 
 		<div class="filter-panel" id="filter-panel">
 			<div class="filter-container" id="filter-category">
