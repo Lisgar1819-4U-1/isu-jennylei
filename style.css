@@ -8,6 +8,7 @@ html, body {
 	font-family: 'Lato', sans-serif;
 	font-weight: 300;
 	overflow: hidden;
+	background-color: rgb(94, 119, 158);
 }
 
 h1, h2, h3 {
@@ -21,20 +22,27 @@ h1 {
 }
 
 h2 {
-	letter-spacing: 3px;
-	color: lightgrey;
-	font-size: 1.5em;
-	font-weight: 300;
+	color: rgb(49, 74, 114);
+	letter-spacing: 2px;
+	font-size: 2em;
+	font-weight: normal;
 }
 
 h3 {
 	letter-spacing: 3px;
-	color: grey;
+	color: rgb(49, 74, 114);
+	font-size: 1.5em;
+	font-weight: 300;
+}
+
+h4 {
+	letter-spacing: 3px;
+	color: rgb(94, 119, 158);
 	font-size: 1.5em;
 	font-weight: normal;
 }
 
-h4 {
+h5 {
 	margin: 10px 0;
 	color: black;
 	font-size: 1.5em;
@@ -49,6 +57,7 @@ ul {
 }
 
 li {
+	color: rgb(49, 74, 114);
 	letter-spacing: 1px;
 	list-style: none;
 	position: relative;
@@ -87,14 +96,14 @@ li.selected:before {
 
 .color-strip {
 	position: absolute;
-	background-color: blue;
+	background-color: rgb(49, 74, 114);
 	width: 100%;
 	height: 7px;
 	z-index: 200;
 }
 
 .header {
-	/*background-color: rgba(0, 0, 255, 0.1);*/
+	color: white;
 	height: 15%;
 	width: 100%;
 	display: flex;
@@ -144,18 +153,15 @@ li.selected:before {
 }
 
 .create-container {
+	background-color: white;
 	height: 100%;
 	display: flex;
 	align-items: center;
 }
 
-.form-group {
-	width: 100%;
-}
-
 fieldset {
 	padding: 30px;
-	border: 1px solid grey;
+	border: 1px solid rgb(49, 74, 114);
 	border-radius: 3px;
 }
 
@@ -173,7 +179,7 @@ input, select {
 }
 
 input, select {
-	border-left: 3px solid blue;
+	border-left: 3px solid rgb(49, 74, 114);
 }
 
 input[type='button'], input[type='submit'] {
@@ -187,26 +193,33 @@ input[type='button'], input[type='submit'] {
 	width: 47%;
 }
 
+option {
+	cursor: pointer;
+}
+
 /* MAIN CONTAINER */
 
 .main-container {
+	background-color: white;
+	border-radius: 15px 15px 0 0;
 	position: relative;
 	width: 100%;
 	height: 85%;
-	/*background-color: tomato;*/
 	z-index: 100;
 }
 
 /* SIDEBAR */
 
 .side-bar {
-	padding: 0 30px;
+	background-color: rgba(94, 119, 158, 0.08);
+	padding: 15px 30px 0 30px;
 	position: relative;
 	box-sizing: border-box;
 	float: left;
 	height: 100%;
 	width: 18%;
-	border-right: 1px solid grey;
+	/*border-right: 1px solid rgb(94, 119, 158);*/
+	/*box-shadow: 0 5px 3px 3px lightblue;*/
 }
 
 .float-bottom {
@@ -215,7 +228,7 @@ input[type='button'], input[type='submit'] {
 	position: absolute;
 	left: 0;
 	bottom: 0;
-	background-color: rgb(245, 245, 245);
+	background-color: rgba(94, 119, 158, 0.1);
 	line-height: 3em;
 }
 
@@ -260,7 +273,8 @@ input[type='button'], input[type='submit'] {
 }
 
 .card {
-	background-color: rgb(248, 248, 248);
+	background-color: rgba(94, 119, 158, 0.08);
+	/*background-color: rgb(248, 248, 248);*/
 	width: 100%;
 	box-sizing: border-box;
 	padding: 10px;
@@ -304,7 +318,8 @@ input[type='button'], input[type='submit'] {
 }
 
 .card:hover {
-	background-color: #efefef;
+	/*background-color: #efefef;*/
+	background-color: rgba(94, 119, 158, 0.15);
 }
 
 .dates {
@@ -435,20 +450,21 @@ input[type='button'], input[type='submit'] {
 	transition: 0.3s;
 }
 
-.filter-element:hover {
-	background-color: rgba(0, 0, 255, 0.05);
+.filter-button:hover {
+	border-color: rgb(49, 74, 114);
 }
 
 .filter-button {
 	font-size: 0.9em;
-	border-radius: 3px;
+	border-radius: 5px;
 	letter-spacing: 2px;
-	background-color: rgba(0, 0, 255, 0.1);
+	border: 2px solid rgb(94, 119, 158);
 	padding: 7px 10px;
 	cursor: pointer;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	transition: 0.3s;
 }
 
 .filter-text {

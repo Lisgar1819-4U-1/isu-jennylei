@@ -69,7 +69,7 @@
 
 			function logout() {
 				// alert("isOpera = " + isOpera + "/isFirefox = " + isFirefox + "/isSafari = " + isSafari + "/isIE = " + isIE + "/isEdge = " + isEdge + "/isChrome = " + isChrome );
-				homePage = '/myphp.php'
+				homePage = '/index.php'
 				if ( isIE || isEdge) 
 					// IE has a simple solution for it - API:
 			    		try { outcome = document.execCommand("ClearAuthenticationCache") }catch(e){}

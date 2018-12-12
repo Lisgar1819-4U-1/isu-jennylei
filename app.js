@@ -3,7 +3,7 @@ let mainContent = document.getElementById('main-content');
 let cardContainer = document.getElementById('card-container');
 let logInBtn = document.getElementById('log-in');
 let cancelLogInBtn = document.getElementById('cancel-log-in');
-let expandableAnnouncement = document.getElementById('expandable');
+let expandable = document.getElementById('expandable');
 let overlay = document.getElementById('overlay');
 let closeOverlayBtn = document.getElementById('close-overlay');
 let cards = document.getElementsByClassName('card');
@@ -111,13 +111,22 @@ function logInClick() {
 	}
 }
 
+function openOverlay() {
+		expandable.classList.add('half-screen');
+		expandable.classList.remove('no-padding');
+		overlay.classList.add('full-screen');
+}
+
+function closeOverlay() {
+	expandable.classList.remove('half-screen');
+	expandable.classList.add('no-padding');
+	overlay.classList.remove('full-screen');
+}
+
 function expandAnnouncement() {
 	for(let i = 0; i < cards.length; i++) {
 		cards[i].onclick = function() {
-			// console.log(this);
-			expandable.classList.add('half-screen');
-			expandable.classList.remove('no-padding');
-			overlay.classList.add('full-screen');
+			openOverlay();
 
 			category = this.children[0].innerText;
 			group = this.children[1].innerText;
@@ -129,7 +138,7 @@ function expandAnnouncement() {
 			month = this.parentElement.classList[2];
 
 			expandable.innerHTML = `
-				<div class="close-overlay" id="close-overlay" onclick="closeAnnouncement()">&#10005;</div>
+				<div class="close-overlay" id="close-overlay" onclick="closeOverlay()">&#10005;</div>
 
 				<p class="card-info border">${category}</p>
 				<p class="card-info">${group}</p>
@@ -151,14 +160,8 @@ function expandAnnouncement() {
 
 function overlayClick() {
 	overlay.onclick = function() {
-		closeAnnouncement();
+		closeOverlay();
 	}
-}
-
-function closeAnnouncement() {
-	expandable.classList.remove('half-screen');
-	expandable.classList.add('no-padding');
-	overlay.classList.remove('full-screen');
 }
 
 function floatAnnouncements() {
@@ -216,6 +219,7 @@ function filterElementClick(filterIndex, filter, type) {
 			curFilter[filterIndex] = this.innerText;
 
 			resetFilter();
+	console.log('asd');
 
 			if (curFilter[filterIndex] == 'None') {
 				filter.firstElementChild.innerText = type;
@@ -263,8 +267,8 @@ function addFilter() {
 }
 
 function resetFilter() {
-	curFilter[0] = 'None';
-	curFilter[1] = 'None';
+	// curFilter[0] = 'None';
+	// curFilter[1] = 'None';
 
 	for (let i = 0; i < cards.length; i++) {
 		$(cards[i]).show('slow');

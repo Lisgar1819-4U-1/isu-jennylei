@@ -4,7 +4,7 @@
 	?>
 
 	<div class="no-content" id="no-content">
-		<h2>No announcements for this month!</h2>
+		<h3>No announcements for this month!</h3>
 		<?php
 			if ($isAdmin)
 				echo '<a href="create.php">Create announcement</a>';
@@ -12,7 +12,7 @@
 	</div>
 
 	<div class="header-panel">
-		<h3 id="month">September</h3>
+		<h4 id="month">September</h4>
 
 		<div class="filter-panel" id="filter-panel">
 			<div class="filter-container" id="filter-category">
@@ -91,7 +91,7 @@
 
 						echo '
 							<div class="dates month_' . $month . '">
-								<h4 class="date">' . $day . '</h4>';
+								<h5 class="date">' . $day . '</h5>';
 
 						$ended = true;
 					}

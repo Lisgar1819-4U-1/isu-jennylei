@@ -45,9 +45,9 @@
 		}
 	?>
 
-	<div class="create-container form-container" id="create-container">
+	<div class="create-container" id="create-container">
 		<div class="half flex">
-			<h1>CREATE ANNOUNCEMENT</h1>
+			<h2>CREATE ANNOUNCEMENT</h2>
 		</div>
 		<div class="half flex">
 			<form class="create-form" method="post">
@@ -72,7 +72,7 @@
 
 					<input type="text" name="location" <?php if (strlen($location) > 0){?>value="<?=$location?>"<?php } else { ?>placeholder="Location"<?php } ?>/>
 
-					<select name="category">
+					<select class="form-select" id="category-select" name="category" onChange="checkOption('category-select');">
 						<option autofocus>Select Category</option>
 						<?php
 							$result = $con->query("SELECT id, name FROM Category");
@@ -87,11 +87,11 @@
 								}
 							}
 						?>
-						<option onclick="createNewGroup()">Create New Category</option>
+						<option>Create New Category</option>
 					</select>
 					<br>
 
-					<select name="organization">
+					<select class="form-select" id="organization-select" name="organization" onChange="checkOption('organization-select');">
 						<option autofocus>Organization, Team or Group </option>
 						<?php
 							$result = $con->query("SELECT id, name FROM Topic");
@@ -106,7 +106,7 @@
 								}
 							}
 						?>
-						<option onclick="createNewGroup()">Create New Category</option>
+						<option>Create New organization, team or group</option>
 					</select>
 
 					<input type="text" name="description" <?php if (strlen($description) > 0){?>value="<?=$description?>"<?php } else { ?>placeholder="Description"<?php } ?>/>
@@ -151,9 +151,78 @@
 	}
 	?>
 
+	<div class="overlay" id="overlay"></div>
+	<div class="expandable no-padding" id="expandable"></div>
+	<?php
+		$action = $_REQUEST['group'];
+		$name = $con->real_escape_string($_REQUEST['groupName']);
+
+		if (isset($_POST['createGroup'])) {
+			if ($action == "category")
+				$sql = "INSERT into Category (name) VALUES ('$name')";
+			else if ($action == "organization")
+				$sql = "INSERT into Topic (name) VALUES ('$name')";
+
+			echo $sql;
+
+			$con->query($sql);
+
+			echo "<meta http-equiv='refresh' content='0'>";
+		}
+	?>
+
 	<script type="text/javascript">
 		function returnToAdmin() {
 			window.location = 'admin.php';
+		}
+
+		let expandable = document.getElementById('expandable');
+		let overlay = document.getElementById('overlay');
+
+		function openOverlay() {
+			expandable.classList.add('half-screen');
+			expandable.classList.remove('no-padding');
+			overlay.classList.add('full-screen');
+		}
+
+		function closeOverlay() {
+				console.log('close goddammit');
+			expandable.classList.remove('half-screen');
+			expandable.classList.add('no-padding');
+			overlay.classList.remove('full-screen');
+		}
+
+		function checkOption(id) {
+			console.log(id);
+			let selectBox = document.getElementById(id);
+			let selectedIndex = selectBox.selectedIndex;
+
+			if (selectedIndex == selectBox.options.length - 1) {
+				console.log(selectBox.name);
+				
+				openOverlay();
+
+				expandable.innerHTML = `
+					<form method='post'>
+						<fieldset>
+							<div class="close-overlay" id="close-overlay" onclick="closeOverlay()">&#10005;</div>
+
+							<legend>New ${selectBox.name}</legend>
+
+							<input type='hidden' name='group' value='${selectBox.name}'/>
+
+							<input type='text' name='groupName'/>
+							<input type='submit' value='Add' name='createGroup'/>
+						</fieldset>
+					</form>
+				`;
+			}
+
+		}
+
+		overlay.onclick = function() {
+			console.log('help');
+			closeOverlay();
 		}
 	</script>
 
