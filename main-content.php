@@ -81,7 +81,9 @@
 					$year = $row["year"];
 					$content = $row["content"];
 					// echo "is" . $day . " = " . $prevDate;
-					if ($year != date("Y")) continue;
+
+					// Only displays announcements relevant to the current school year
+					if (!( ($month >= 9 && $year == date("Y")) || ($month < 9 && $year == date("Y") + 1) )) continue;
 
 					if ( $day != $prevDate || $month != $prevMonth ){
 						if ( $ended ){

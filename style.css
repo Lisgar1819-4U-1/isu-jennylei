@@ -425,32 +425,28 @@ option {
 	display: inline-block;
 }
 
-.filter-panel {
-	/*margin-right: 1em;*/
-}
-
 .filter-container {
-	margin: 5px 20px;
+	width: 80px;
+	margin: 5px 2em;
 	position: relative;
 	display: inline-block;
-	float: right;
 }
 
 .filter-content {
+	width: 102px;
 	position: absolute;
 	display: none;
-	width: 100%;
 	left: 0;
 	background-color: white;
 	overflow: hidden;
 	z-index: 200;
+	border: 1px solid rgba(95, 119, 158, 0.3);
 }
 
 .filter-element {
-	line-height: 1.2em;
+	line-height: 1em;
 	padding: 0.5em 2px;
 	cursor: pointer;
-	transition: 0.3s;
 }
 
 .filter-button:hover {
@@ -458,6 +454,7 @@ option {
 }
 
 .filter-button {
+	width: 100%;
 	font-size: 0.9em;
 	border-radius: 5px;
 	letter-spacing: 2px;
@@ -467,15 +464,10 @@ option {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	transition: 0.3s;
+	transition: 0.2s;
 }
 
 .filter-text {
 	padding: 0;
 	margin: 0;
-}
-
-.filter-button>img {
-	max-height: 1em;
-	padding-left: 16px;
 }

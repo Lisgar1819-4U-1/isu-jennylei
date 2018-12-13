@@ -68,7 +68,7 @@ CREATE table if not exists Topic ( Id int unsigned AUTO_INCREMENT not null, Name
 CREATE table if not exists Announcements ( Id int unsigned AUTO_INCREMENT not null, category_id int unsigned not null, topic_id int unsigned not null, Title char(128) binary default '' not null, Location char(128) binary default '', Content varchar(512) binary default '' not null, Datetime timestamp not null default current_timestamp, primary key Id (Id), foreign key (category_id) references Category(Id), foreign key (topic_id) references Topic(Id) ) engine=MyISAM CHARACTER set utf8 collate utf8_bin comment='Database privileges';
 
 /*Add test data for Category
-insert into Category (Name) values ('Clubs'), ('Sports'), ('Events');
+insert into Category (Id, Name) values (0, "");
 */
 
 

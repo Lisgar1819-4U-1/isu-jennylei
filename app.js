@@ -11,6 +11,7 @@ let editBtn = document.getElementsByClassName('edit-btn');
 
 let months = ['January', 'February', 'March', 'May', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 let curMonth = 9;
+// let curYear = 
 let curFilter = ['None', 'None'];
 
 window.onload = function() {
@@ -46,7 +47,7 @@ function monthClick() {
 			curFilter[0] = 'None';
 			curFilter[1] = 'None';
 			resetFilter();
-			
+
 			floatAnnouncements();
 		}
 	}
@@ -179,9 +180,9 @@ function filterBtnClick() {
 			let content = this.nextElementSibling;
 
 			if(getComputedStyle(content).display == 'none')
-				$(content).show('slow');
+				$(content).show('fast');
 			else
-				$(content).hide('slow');
+				$(content).hide('fast');
 
 			filterElementClick(i, this, this.classList[1]);
 		}

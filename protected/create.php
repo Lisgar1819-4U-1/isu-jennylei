@@ -12,11 +12,11 @@
 	<?php
 		include '../setup.php';
 
+		// Gets announcement id for editing
 		$id = $_GET['id'];
 		if (strlen($id) == 0) $id = $_REQUEST['id'];
+
 		$action = $_REQUEST['action'];
-		// echo "id = " . $id;
-		// echo "action = " . $action;
 		$title = "";
 		$date = "";
 		$time = "";
@@ -24,13 +24,15 @@
 		$category_id = "";
 		$topic_id = "";
 		$description = "";
+
+		// If editing, set default variables
 		if (strlen($id) > 0 && strlen($action) == 0){
 			$sql = "SELECT title, DATE_FORMAT(dateTime, '%Y-%m-%d') as date, DATE_FORMAT(dateTime, '%H:%m') as time, location, content, category_id, topic_id FROM Announcements WHERE id=" . $id;
-			// echo "sql = " . $sql;
+
 			$result = $con->query($sql);
 			
 			if ($result->num_rows > 0) {
-				// found the current item
+				// Find the current announcement
 				$row = $result->fetch_assoc();
 				$title = $row["title"];
 				$date = $row["date"];
@@ -42,7 +44,6 @@
 			} else {
 				$id = "";
 			}
-			
 		}
 	?>
 
@@ -77,7 +78,7 @@
 
 					<input type="text" name="location" <?php if (strlen($location) > 0){?>value="<?=$location?>"<?php } else { ?>placeholder="Location"<?php } ?>/>
 
-					<select class="form-select" id="category-select" name="category" onChange="checkOption('category-select');">
+					<select class="form-select" id="category-select" name="category" onChange="checkOption('category-select');" required>
 						<option autofocus>Select Category</option>
 						<?php
 							$result = $con->query("SELECT id, name FROM Category");
@@ -96,13 +97,13 @@
 					</select>
 					<br>
 
-					<select class="form-select" id="organization-select" name="organization" onChange="checkOption('organization-select');">
-						<option autofocus>Organization, Team or Group </option>
+					<select class="form-select" id="organization-select" name="organization" onChange="checkOption('organization-select');" required>
+						<option autofocus>Select Organization, Team or Group</option>
 						<?php
 							$result = $con->query("SELECT id, name FROM Topic");
 
 							if ($result->num_rows > 0) {
-								// create option for each category type
+								// create option for each organization type
 								while($row = $result->fetch_assoc()) {
 									echo '<option value = "' . $row["id"] . '"';
 									if ( $row["id"] == $topic_id)
@@ -118,6 +119,7 @@
 
 					<input type="submit" id="submit-create-form" value="<?php if (strlen($id) > 0){?>Modify<?php } else { ?>Create<?php } ?>">
 					<?php if (strlen($id) > 0){?> <input type="submit" name="delete" value="Delete"> <?php } 
+						// Deletes announcement
 						if (isset($_POST['delete'])) {
 							$sql = "DELETE from announcements where announcements.id = " . $id;
 
@@ -131,37 +133,41 @@
 	</div>
 
 	<?php
-	if (strlen($action) > 0) {
-		$title = $con->real_escape_string($_REQUEST['title']);
-		$date = $con->real_escape_string($_REQUEST['date']);
-		$time = $con->real_escape_string($_REQUEST['time']);
-		$location = $con->real_escape_string($_REQUEST['location']);
-		$category = $con->real_escape_string($_REQUEST['category']);
-		$organization = $con->real_escape_string($_REQUEST['organization']);
-		$content = $con->real_escape_string($_REQUEST['description']);
+		// Save changes
+		if (strlen($action) > 0) {
+			$title = $con->real_escape_string($_REQUEST['title']);
+			$date = $con->real_escape_string($_REQUEST['date']);
+			$time = $con->real_escape_string($_REQUEST['time']);
+			$location = $con->real_escape_string($_REQUEST['location']);
+			$category = $con->real_escape_string($_REQUEST['category']);
+			$organization = $con->real_escape_string($_REQUEST['organization']);
+			$content = $con->real_escape_string($_REQUEST['description']);
 
-		$timestamp = date('Y-m-d H:i:s', strtotime($date . ' ' . $time));
+			$timestamp = date('Y-m-d H:i:s', strtotime($date . ' ' . $time));
 
-		if (strlen($id) > 0 && $action == "modify")
-			$sql = "UPDATE Announcements set title='" . $title . "', dateTime='" . $timestamp . "', location='" . $location . "', content='". $content . "', category_id='" . $category . "', topic_id='" . $organization. "' WHERE id=" . $id;
-		else
-			$sql = "INSERT INTO Announcements (title, dateTime, location, content, category_id, topic_id) VALUES ('$title', '$timestamp', '$location', '$content', $category, $organization)";
-			
-		echo "sql = " . $sql;
+			// Update db
+			if (strlen($id) > 0 && $action == "modify")
+				$sql = "UPDATE Announcements set title='" . $title . "', dateTime='" . $timestamp . "', location='" . $location . "', content='". $content . "', category_id='" . $category . "', topic_id='" . $organization. "' WHERE id=" . $id;
+			else
+				$sql = "INSERT INTO Announcements (title, dateTime, location, content, category_id, topic_id) VALUES ('$title', '$timestamp', '$location', '$content', $category, $organization)";
+				
+			// echo "sql = " . $sql;
 
-		$con->query($sql);
+			$con->query($sql);
 
-		// echo "<meta http-equiv='refresh' content='0'>";
-		// echo "<script> window.location.assign('admin.php'); </script>";
-	}
+			// echo "<meta http-equiv='refresh' content='0'>";
+			echo "<script> window.location.assign('admin.php'); </script>";
+		}
 	?>
 
 	<div class="overlay" id="overlay"></div>
 	<div class="expandable no-padding" id="expandable"></div>
 	<?php
+		// Adding new groups / organizations
 		$action = $_REQUEST['group'];
 		$name = $con->real_escape_string($_REQUEST['groupName']);
 
+		// If submit clicked
 		if (isset($_POST['createGroup'])) {
 			if ($action == "category")
 				$sql = "INSERT into Category (name) VALUES ('$name')";
