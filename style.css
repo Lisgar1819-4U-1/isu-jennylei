@@ -149,15 +149,14 @@ li.selected:before {
 /* FORMS MENU */
 .create-form {
 	font-size: 1.2em;
-	/*width: 80%;*/
 	margin: 2em;
+	width: 100%;
 }
 
 .create-container {
 	background-color: white;
 	height: 100%;
 	display: flex;
-	align-items: center;
 }
 
 fieldset {

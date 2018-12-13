@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <title>Login</title>
+
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="media-query.css">
+
+        <style type="text/css">
+            html, body {
+                background-color: white;
+            }
+
+            .half {
+                float: left;
+            }
+
+            form {
+                font-size: 1.2em;
+                margin: 2em;
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="color-strip"></div>
+
+        <div class="half flex">
+            <h2>LOG IN</h2>
+        </div>
+        <div class="half flex">
+            <form class="create-form" method="post">
+                <fieldset>
+                    <legend>Log In</legend>
+
+                    <!-- <label for="httpd_username">Username: </label> -->
+                    <input type="text" name="httpd_username" value="" placeholder="Username" />
+
+                    <!-- <label for="httpd_password">Password: </label> -->
+                    <input type="password" name="httpd_password" value="" placeholder="Password" />
+                    
+                    <input type="submit" name="login" value="Login" />
+                </fieldset>
+            </form>
+        </div>
+    </body>
+</html>

@@ -18,7 +18,7 @@
 			<div class="float-right">
 				<p class="header-btn create" id="create" onclick="location.href='create.php'">Create</p>
 				<p class="header-btn settings" id="settings">Settings</p>
-				<p class="header-btn log-out" id="log-out" onclick="logout()">Log out</p>
+				<a class="header-btn log-out" id="log-out" onclick="/logout">Log out</a>
 			</div>
 		</div>
 
