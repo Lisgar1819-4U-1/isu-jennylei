@@ -52,7 +52,7 @@
 			<h2>CREATE ANNOUNCEMENT</h2>
 		</div>
 		<div class="half flex">
-			<form class="create-form" id="create-form" method="post">
+			<form name="create" class="create-form" id="create-form" method="post" onsubmit="return validate()">
 				<fieldset>
 					<legend>Create Announcement</legend>
 					
@@ -115,9 +115,9 @@
 						<option>Create New organization, team or group</option>
 					</select>
 
-					<input type="text" name="description" <?php if (strlen($description) > 0){?>value="<?=$description?>"<?php } else { ?>placeholder="Description"<?php } ?>/>
+					<textarea type="text" maxlength="512" rows="7" name="description" <?php if (strlen($description) > 0){?>value="<?=$description?>"<?php } else { ?>placeholder="Description"<?php } ?>> </textarea>
 
-					<input type="submit" id="submit-create-form" value="<?php if (strlen($id) > 0){?>Modify<?php } else { ?>Create<?php } ?>">
+					<input type="submit" name="submit" id="submit-create-form" value="<?php if (strlen($id) > 0){?>Modify<?php } else { ?>Create<?php } ?>">
 					<?php if (strlen($id) > 0){?> <input type="submit" name="delete" value="Delete"> <?php } 
 						// Deletes announcement
 						if (isset($_POST['delete'])) {
@@ -132,9 +132,13 @@
 		</div>
 	</div>
 
+	<div class="error-msg" id="errorId">
+		
+	</div>
+
 	<?php
 		// Save changes
-		if (strlen($action) > 0) {
+		if (strlen($action) > 0 && isset($_POST['submit'])) {
 			$title = $con->real_escape_string($_REQUEST['title']);
 			$date = $con->real_escape_string($_REQUEST['date']);
 			$time = $con->real_escape_string($_REQUEST['time']);
@@ -182,7 +186,7 @@
 		}
 	?>
 
-	<!-- <script src="../form-validation.js"></script> -->
+	<script src="../form-validation.js"></script>
 	<script type="text/javascript">
 		function returnToAdmin() {
 			window.location = 'admin.php';

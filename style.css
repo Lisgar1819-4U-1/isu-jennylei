@@ -170,7 +170,7 @@ legend {
 	padding: 0 10px;
 }
 
-input, select {
+input, select, textarea {
 	border-radius: 3px;
 	border: 1px solid lightgrey;
 	padding: 10px 15px;
@@ -187,6 +187,12 @@ input[type='button'], input[type='submit'] {
 	cursor: pointer;
 }
 
+textarea {
+	resize: none;
+	line-height: 1.5em;
+	letter-spacing: 0.2px;
+}
+
 .half-width {
 	width: 47%;
 }
@@ -195,9 +201,22 @@ option {
 	cursor: pointer;
 }
 
-.invalid {
-	border: 1px solid red;
-	border-left: 3px solid rgb(49, 74, 114);
+.error-msg {
+	border-radius: 0 0 10px 10px;
+	letter-spacing: 2px;
+	font-weight: normal;
+	line-height: 2.7em;
+	background-color: tomato;
+	color: white;
+	position: absolute;
+	top: -100%;
+	max-width: 100%;
+	text-align: center;
+	z-index: 250;
+	padding: 0 35px;
+	left: 50%;
+	transform: translateX(-50%);
+	transition: 0.3s;
 }
 
 /* MAIN CONTAINER */

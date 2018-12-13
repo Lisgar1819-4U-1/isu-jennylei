@@ -1,76 +1,71 @@
-let createForm = document.getElementById('create-form');
-let title = document.getElementsByName('title')[0];
-let date = document.getElementsByName('date')[0];
-let time = document.getElementsByName('time')[0];
+let title;
+let date;
+let time;
+let category;
+let organization;
 
 let textRegExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]*$/;
 let dateRegExp = /^[12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
 let timeRegExp = /^(0[1-9]|1[0-2]):(0[0-9]|[1-5][0-9])$/;
+let selectRegExp = /^\d*$/;
 
-let valid = true;
+let error = "";
+let errorId = document.getElementById('errorId');
 
-title.addEventListener("input", function (event) {
-	value = true;
+function validate() {
+	error = "";
 
-	// Each time the user types something, we check if the title field is valid.
-	if (!(title.value.length > 0 && textRegExp.test(title.value)))
-		valid = false;
+	title = document.forms["create"]['title'].value;
+	date = document.forms["create"]['date'].value;
+	time = document.forms["create"]['time'].value;
+	category = document.forms["create"]['category'].value;
+	organization = document.forms["create"]['organization'].value;
 
-	if (valid == false)
-		title.classList.add('invalid');
-}, false);
+	// Date cannot be before today
+	// error = checkBeforeToday("date", date);
 
-date.addEventListener("input", function (event) {
-	value = true;
+	// Select option must be a value
+	// Date must be in syntax yyyy-mm-dd
+	error = syntax("organization, team or group", organization, selectRegExp);
+	error = syntax("category", category, selectRegExp);
+	error = syntax("date", date, dateRegExp);
+	error = syntax("title", title, textRegExp);
 
-	// Each time the user types something, we check if the date field is valid.
-	if (!(date.value.length > 0 && textRegExp.test(date.value)))
-		valid = false;
+	// Length of input fields
+	error = maxLength("date", date, 10);
+	error = maxLength("title", title, 10);
 
-	if (valid == false)
-		date.classList.add('invalid');
-}, false);
+	if (error.length > 0) {
+		errorId.innerText = error; 
+		errorId.style.top = 0; 
 
-time.addEventListener("input", function (event) {
-	value = true;
+		return false; 
+	}; 
 
-	// Each time the user types something, we check if the time field is valid.
-	if (!(time.value.length > 0 && textRegExp.test(time.value)))
-		valid = false;
+	return true;
+} 
 
-	if (valid == false)
-		time.classList.add('invalid');
-}, false);
+function maxLength(name, text, len) {
+	if (text.length > len)
+		error = "Length of input field : " + name + " cannot be more than " + len;
+	
+	return error;
+}
 
-function addEvent(element, event, callback) {
-  var previousEventCallBack = element["on"+event];
-  element["on"+event] = function (e) {
-    var output = callback(e);
+function syntax(name, text, regex) {
+	if (!regex.test(text))
+		error = "Invalid " + name;
+	
+	return error;
+}
 
-    // A callback that returns `false` stops the callback chain
-    // and interrupts the execution of the event callback.
-    if (output === false) return false;
+function checkBeforeToday(name, text) {
+	utcDate = new Date(text); //Date object a day behind
+	var date = new Date(utcDate.getTime() + utcDate.getTimezoneOffset() * 60000) //local Date
+	var today = new Date(new Date().toDateString());;
 
-    if (typeof previousEventCallBack === 'function') {
-      output = previousEventCallBack(e);
-      if(output === false) return false;
-    }
-  }
-};
-
-// addEvent(createForm, "submit", function () {
-//   var test = email.value.length === 0 || emailRegExp.test(email.value);
-
-//   if (!test) {
-//     // email.className = "invalid";
-//     // error.innerHTML = "I expect an e-mail, darling!";
-//     // error.className = "error active";
-
-//     // Some legacy browsers do not support the event.preventDefault() method
-//     return false;
-//   } else {
-//     // email.className = "valid";
-//     // error.innerHTML = "";
-//     // error.className = "error";
-//   }
-// });
+	if (date.getTime() < today.getTime())
+		error = "The date field : " + name + " cannot be before today<br/>";
+	
+	return error;
+}
