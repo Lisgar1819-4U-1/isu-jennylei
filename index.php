@@ -1,3 +1,5 @@
+<!-- Public page -->
+
 <!DOCTYPE html>
 
 <html>

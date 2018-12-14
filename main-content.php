@@ -1,3 +1,5 @@
+<!-- Main content: display announcements to user -->
+
 <div class="main-content" id="main-content">
 	<?php
 		if (basename($_SERVER["REQUEST_URI"], ".php") == 'admin') $isAdmin = true;
@@ -101,7 +103,7 @@
 					echo '
 						<div class="card ' . preg_replace("/[\s_]/", "-", $category) . ' ' . preg_replace("/[\s_]/", "-", $topic) . ' None">
 							<p class="card-info card-category border">' . $category . '</p>
-							<p class="card-info card-topic" style="display:inline-block;">' . $topic . '</p>
+							<p class="card-info card-topic">' . $topic . '</p>
 							<p class="card-title">' . $title . '</p>
 							<p class="card-info card-setting">' . $time . '</p>
 							<p class="card-info card-setting">' . $location . '</p>

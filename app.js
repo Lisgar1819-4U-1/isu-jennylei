@@ -1,8 +1,11 @@
+// Html elements
 let monthBtn = document.getElementsByClassName("month-btn");
 let mainContent = document.getElementById('main-content');
 let cardContainer = document.getElementById('card-container');
+let dates = cardContainer.children;
+
 let logInBtn = document.getElementById('log-in');
-let cancelLogInBtn = document.getElementById('cancel-log-in');
+
 let expandable = document.getElementById('expandable');
 let overlay = document.getElementById('overlay');
 let closeOverlayBtn = document.getElementById('close-overlay');
@@ -11,9 +14,9 @@ let editBtn = document.getElementsByClassName('edit-btn');
 
 let months = ['January', 'February', 'March', 'May', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 let curMonth = 9;
-// let curYear = 
 let curFilter = ['None', 'None'];
 
+// Waits until html elements are all loaded
 window.onload = function() {
 	monthClick();
 
@@ -55,17 +58,17 @@ function monthClick() {
 
 // Sorts announcements based on current month
 function sortAnnouncement() {
-	let numVisible = cardContainer.children.length;
+	let numVisible = dates.length;
 
 	// If the date is part of the current month then set as visible, if not then invisible
-	for	(let j = 0; j < cardContainer.children.length; j++) {
-		if (cardContainer.children[j].classList.contains('month_' + curMonth)) {
-			$(cardContainer.children[j]).show('slow');
-			cardContainer.children[j].classList.add('visible');
+	for	(let j = 0; j < dates.length; j++) {
+		if (dates[j].classList.contains('month_' + curMonth)) {
+			$(dates[j]).show('slow');
+			dates[j].classList.add('visible');
 			numVisible++;
 		} else {
-			$(cardContainer.children[j]).hide('slow');
-			cardContainer.children[j].classList.remove('visible');
+			$(dates[j]).hide('slow');
+			dates[j].classList.remove('visible');
 			numVisible--;
 		}
 	}
@@ -150,19 +153,19 @@ function overlayClick() {
 function floatAnnouncements() {
 	let float = 0;
 
-	for(let i = 0; i < cardContainer.children.length; i++) {
-		cardContainer.children[i].classList.remove('col-1');
-		cardContainer.children[i].classList.remove('col-2');
+	for(let i = 0; i < dates.length; i++) {
+		dates[i].classList.remove('col-1');
+		dates[i].classList.remove('col-2');
 
-		if (cardContainer.children[i].classList.contains('visible')) {
+		if (dates[i].classList.contains('visible')) {
 			switch(float) {
 				case 0: {
-					cardContainer.children[i].classList.add('col-1');
+					dates[i].classList.add('col-1');
 					float++;
 					break;
 					}
 				case 1: {
-					cardContainer.children[i].classList.add('col-2');
+					dates[i].classList.add('col-2');
 					float--;
 					break;
 				}
@@ -231,7 +234,6 @@ function addFilter() {
 		}
 	}
 
-	let dates = cardContainer.children;
 	let visible = false;
 
 	// Loops through all announcements of a certain date to check if any are visible, if no visible cards then date is invisible too

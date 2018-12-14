@@ -1,20 +1,35 @@
+/* Media queries for different screen sizes */
+
 @media screen and (max-width: 1000px) {
 	ul {
 		padding-left: 7%;
 	}
+
+	.side-bar {
+		padding: 8px 20px;
+	}
+
+	.selected {
+		padding-left: 20px !important;
+	}
+
+	.selected:before {
+		font-size: 0.8em;
+	}
 }
 
 @media screen and (max-width: 900px) {
-	ul {
-		padding-left: 0;
-	}
-
 	.side-bar {
 		width: 162px;
 	}
 
 	.main-content {
 		width: calc(100% - 162px);
+	}
+
+	.card-topic {
+		display: block;
+		padding: 5px 0;
 	}
 }
 
@@ -28,7 +43,7 @@
 	}
 }
 
-@media screen and (max-height: 560px) and (orientation: landscape) {
+@media screen and (max-height: 560px) and (max-width: and (orientation: landscape) {
 	h1 {
 		font-size: 1.8em;
 	}

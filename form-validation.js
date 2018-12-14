@@ -1,3 +1,10 @@
+// Contains functions related to form validation
+//
+// Text inputs may only take in a certain set of characters
+// Date/time inputs must contain valid dates
+// Select inputs must be a defined option (not default or create new)
+
+// Announcement information
 let title;
 let date;
 let time;
@@ -6,19 +13,24 @@ let organization;
 let place;
 let description;
 
+// New category or organization input
 let newGroup;
 
+// Regular expressions
 let textRegExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-\s+]*$/;
 let dateRegExp = /^[12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
 let timeRegExp = /^(0[1-9]|1[0-2]):(0[0-9]|[1-5][0-9])$/;
 let selectRegExp = /^\d*$/;
 
+// Error message and html element
 let error = "";
 let errorId = document.getElementById('errorId');
 
+// Validates creating or editing announcement form
 function validateCreate() {
 	error = "";
 
+	// Gets announcement information from form
 	title = document.forms["create"]['title'].value;
 	date = document.forms["create"]['date'].value;
 	time = document.forms["create"]['time'].value;
@@ -44,6 +56,7 @@ function validateCreate() {
 	error = maxLength("location", place, 128);
 	error = maxLength("title", title, 128);
 
+	// If there is an error message, display to user
 	if (error.length > 0) {
 		errorId.innerText = error; 
 		errorId.style.top = 0; 
@@ -54,6 +67,7 @@ function validateCreate() {
 	return true;
 }
 
+// Validates creating new category or organization form
 function validateNewGroup() {
 	error = "";
 
@@ -72,6 +86,7 @@ function validateNewGroup() {
 	return true;
 }
 
+// Checks if input is correct length
 function maxLength(name, text, len) {
 	if (text.length > len)
 		error = "Length of " + name + " cannot be more than " + len + " characters";
@@ -79,6 +94,7 @@ function maxLength(name, text, len) {
 	return error;
 }
 
+// Checks if input follows regular expression
 function syntax(name, text, regex) {
 	if (!regex.test(text))
 		error = "Invalid " + name;
@@ -86,6 +102,7 @@ function syntax(name, text, regex) {
 	return error;
 }
 
+// Checks if input is before today
 function checkBeforeToday(name, text) {
 	utcDate = new Date(text); //Date object a day behind
 	var date = new Date(utcDate.getTime() + utcDate.getTimezoneOffset() * 60000) //local Date

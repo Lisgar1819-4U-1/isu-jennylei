@@ -1,3 +1,5 @@
+/* Main stylesheet */
+
 @import url('https://fonts.googleapis.com/css?family=Lato:300,400');
 
 html, body {
@@ -77,6 +79,7 @@ li:before {
 	content: '\0025C8';
 	/*content: '>';*/
 	/*font-weight: normal;*/
+	color: rgb(94, 119, 158);
 	color: blue;
 	position: absolute;
 	left: -15px;
@@ -245,6 +248,11 @@ option {
 	/*box-shadow: 0 5px 3px 3px lightblue;*/
 }
 
+.list-container {
+	overflow: scroll;
+	height: calc(100% - 48px);
+}
+
 .float-bottom {
 	text-align: center;
 	width: 100%;
@@ -317,6 +325,7 @@ option {
 
 .card-topic {
 	padding-left: 1em;
+	display: inline-block;
 }
 
 .card-info {

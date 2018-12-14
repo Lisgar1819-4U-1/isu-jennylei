@@ -1,3 +1,5 @@
+<!-- Gets information from database and displays table -->
+
 <?php
 echo "DB connection test<br/>";
 

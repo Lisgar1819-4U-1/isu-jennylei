@@ -1,3 +1,5 @@
+<!-- Admin page -->
+
 <!DOCTYPE html>
 
 <html>

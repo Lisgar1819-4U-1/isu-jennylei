@@ -1,3 +1,5 @@
+<!-- Create or editing announcements page -->
+
 <!DOCTYPE html>
 
 <html>
