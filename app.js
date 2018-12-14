@@ -73,8 +73,9 @@ function sortAnnouncement() {
 	// Display note if no announcements for corresponding month
 	if (numVisible <= 0 && (curFilter[0] == 'None' && curFilter[1] == 'None')) {
 		$('#no-content').show('slow');
-	}
+	} else {
 		$('#no-content').hide('slow');
+	}
 }
 
 // Redirects to admin page
@@ -218,10 +219,13 @@ function filterElementClick(filterIndex, filter, type) {
 
 // Adds filter to currently visible cards
 function addFilter() {
+	category = curFilter[0].replace(/\s+/, '-');
+	topic = curFilter[1].replace(/\s+/, '-');
+
 	// Loops through all cards and adds class for non-visible cards
 	for (let i = 0; i < cards.length; i++) {
 		if (!cards[i].classList.contains('hidden-card') && cards[i].parentElement.classList.contains('visible')) {
-			if(!(cards[i].classList.contains(curFilter[0]) && cards[i].classList.contains(curFilter[1]))) {
+			if(!(cards[i].classList.contains(category) && cards[i].classList.contains(topic))) {
 				cards[i].classList.add('hidden-card');
 			}
 		}

@@ -99,7 +99,7 @@
 					}
 
 					echo '
-						<div class="card ' . $category . ' ' . $topic . ' None">
+						<div class="card ' . preg_replace("/[\s_]/", "-", $category) . ' ' . preg_replace("/[\s_]/", "-", $topic) . ' None">
 							<p class="card-info card-category border">' . $category . '</p>
 							<p class="card-info card-topic" style="display:inline-block;">' . $topic . '</p>
 							<p class="card-title">' . $title . '</p>

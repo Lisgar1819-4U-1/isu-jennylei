@@ -14,7 +14,7 @@ echo "<tr><th>Id</th><th>Title</th><th>Category</th><th>Topic</th><th>Month</th>
 
 while($row = $result->fetch_assoc()){
 echo "<tr>";
-echo "<td>" . $row["id"] . "</td><td>" . $row["title"] . "</td><td>" . $row["category"] . "</td><td>" . $row["topic"] . "</td><td>" . $row["month"] . "</td><td>" . $row["date"] . "</td>";
+echo "<td>" . $row["Id"] . "</td><td>" . $row["title"] . "</td><td>" . $row["category"] . "</td><td>" . $row["topic"] . "</td><td>" . $row["month"] . "</td><td>" . $row["date"] . "</td>";
 echo "</tr>";
 }
 echo "</table>";

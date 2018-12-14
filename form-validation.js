@@ -8,7 +8,7 @@ let description;
 
 let newGroup;
 
-let textRegExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]*$/;
+let textRegExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-\s+]*$/;
 let dateRegExp = /^[12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
 let timeRegExp = /^(0[1-9]|1[0-2]):(0[0-9]|[1-5][0-9])$/;
 let selectRegExp = /^\d*$/;
