@@ -117,7 +117,7 @@
 							<option>Create New organization, team or group</option>
 						</select>
 
-						<textarea type="text" maxlength="512" rows="7" name="description" <?php if (strlen($description) > 0){?>value="<?=$description?>"<?php } else { ?>placeholder="Description"<?php } ?>> </textarea>
+						<textarea type="text" maxlength="512" rows="7" name="description"><?php if (strlen($id) > 0) {echo $description;} else {echo "Description";}?></textarea>
 
 						<input type="submit" name="submit" id="submit-create-form" value="<?php if (strlen($id) > 0){?>Modify<?php } else { ?>Create<?php } ?>">
 						<?php if (strlen($id) > 0){?> <input type="submit" name="delete" value="Delete"> <?php } 

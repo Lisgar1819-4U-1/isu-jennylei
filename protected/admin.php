@@ -17,7 +17,7 @@
 
 			<div class="float-right">
 				<p class="header-btn create" id="create" onclick="location.href='create.php'">Create</p>
-				<p class="header-btn settings" id="settings">Settings</p>
+				<!-- <p class="header-btn settings" id="settings">Settings</p> -->
 				<a class="header-btn log-out" id="log-out" onclick="/logout">Log out</a>
 			</div>
 		</div>
@@ -28,10 +28,8 @@
 			<?php include '../main-content.php'?>
 		</div>
 
-		<div class="overlay" id="overlay">
-			<div class="expandable no-padding" id="expandable">
-			</div>
-		</div>
+		<div class="overlay" id="overlay"></div>
+		<div class="expandable no-padding" id="expandable"></div>
 
 		<div class="settings-container form-container" id="settings-container">
 			<div class="float-left half flex">
