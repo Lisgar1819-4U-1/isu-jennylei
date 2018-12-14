@@ -52,7 +52,7 @@
 			<h2>CREATE ANNOUNCEMENT</h2>
 		</div>
 		<div class="half flex">
-			<form name="create" class="create-form" id="create-form" method="post" onsubmit="return validate()">
+			<form name="create" class="create-form" id="create-form" method="post" onsubmit="return validateCreate()">
 				<fieldset>
 					<legend>Create Announcement</legend>
 					
@@ -166,6 +166,7 @@
 
 	<div class="overlay" id="overlay"></div>
 	<div class="expandable no-padding" id="expandable"></div>
+
 	<?php
 		// Adding new groups / organizations
 		$action = $_REQUEST['group'];
@@ -219,7 +220,7 @@
 				openOverlay();
 
 				expandable.innerHTML = `
-					<form method='post'>
+					<form method='post' name='new-group' onsubmit='return validateNewGroup();'>
 						<fieldset>
 							<div class="close-overlay" id="close-overlay" onclick="closeOverlay()">&#10005;</div>
 

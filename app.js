@@ -73,9 +73,8 @@ function sortAnnouncement() {
 	// Display note if no announcements for corresponding month
 	if (numVisible <= 0 && (curFilter[0] == 'None' && curFilter[1] == 'None')) {
 		$('#no-content').show('slow');
-	} else {
-		$('#no-content').hide('slow');
 	}
+		$('#no-content').hide('slow');
 }
 
 // Redirects to admin page
