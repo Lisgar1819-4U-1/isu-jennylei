@@ -18,6 +18,15 @@ h1, h2, h3 {
 	padding: 0 15px;
 }
 
+.log-out {
+	color: white;
+	text-decoration: none;
+}
+
+.log-out:hover {
+	text-decoration: underline;
+}
+
 h1 {
 	font-size: 2em;
 	letter-spacing: 2px;

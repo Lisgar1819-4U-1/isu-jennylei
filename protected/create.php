@@ -76,7 +76,7 @@
 						<br>
 
 						<input type="date" name="date" <?php if (strlen($date) > 0){?>value="<?=$date?>"<?php }?> class="half-width" required/>
-						<input type="time" name="time" <?php if (strlen($time) > 0){?>value="<?=$time?>:00"<?php }?> class="half-width float-right"/>
+						<input type="time" name="time" <?php if (strlen($time) > 0){?>value="<?=$time?>:00"<?php }?> class="half-width float-right" required/>
 
 						<br>
 
@@ -128,6 +128,7 @@
 								$sql = "DELETE from announcements where announcements.id = " . $id;
 
 								$con->query($sql);
+								echo "<script> window.location.assign('admin.php'); </script>";
 							}
 						?>
 						<input type="button" value="Cancel" onclick="returnToAdmin()">
