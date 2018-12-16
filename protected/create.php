@@ -125,7 +125,7 @@
 						<?php if (strlen($id) > 0){?> <input type="submit" name="delete" value="Delete"> <?php } 
 							// Deletes announcement
 							if (isset($_POST['delete'])) {
-								$sql = "DELETE from announcements where announcements.id = " . $id;
+								$sql = "DELETE from Announcements where Announcements.id = " . $id;
 
 								$con->query($sql);
 								echo "<script> window.location.assign('admin.php'); </script>";

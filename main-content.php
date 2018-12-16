@@ -44,7 +44,7 @@
 				</div>
 				<div class="filter-content">
 				<?php
-					$result = $con->query("SELECT id, name FROM topic");
+					$result = $con->query("SELECT id, name FROM Topic");
 
 					if ($result->num_rows > 0) {
 						// create option for each category type

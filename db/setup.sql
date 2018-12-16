@@ -76,9 +76,15 @@ insert into Category (Id, Name) values (0, "");
 insert into Topic (Name) values ('Computer Science'), ('Badminton'), ('Curling');
 */
 
-/*Add test data for Announcement
-insert into Announcements (category_id, topic_id, Title, Location, Content, Datetime) values (1, 1, 'This is a test', 'Lisgar CI', 'This is a test announcement', now());
-*/
+/*Add test data for Announcement*/
+insert into Announcements (category_id, topic_id, Title, Location, Content, Datetime) values (1, 1, 'Test 1', 'Lisgar CI', 'Test announcement', now());
+insert into Announcements (category_id, topic_id, Title, Location, Content, Datetime) values (2, 1, 'Test 2', 'Lisgar CI', 'Test announcement', now());
+insert into Announcements (category_id, topic_id, Title, Location, Content, Datetime) values (3, 1, 'Test 3', 'Lisgar CI', 'Test announcement', now());
+insert into Announcements (category_id, topic_id, Title, Location, Content, Datetime) values (1, 1, 'Test 4', 'Lisgar CI', 'Test announcement', now());
+insert into Announcements (category_id, topic_id, Title, Location, Content, Datetime) values (1, 2, 'Test 5', 'Lisgar CI', 'Test announcement', now());
+insert into Announcements (category_id, topic_id, Title, Location, Content, Datetime) values (1, 3, 'Test 6', 'Lisgar CI', 'Test announcement', now());
+
+/*/
 
 /*Sample query
 select ans.Title as title, cat.Name as category, top.Name as topic, ans.Location as location, ans.Content as content, date(ans.Datetime) as date, month(ans.Datetime) as month from Announcements as ans, Category as cat, Topic as top where ans.id='1' and ans.category_id=cat.id and ans.topic_id=top.id order by ans.DatetimeAnnouncements;

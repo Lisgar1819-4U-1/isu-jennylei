@@ -12,6 +12,8 @@ let closeOverlayBtn = document.getElementById('close-overlay');
 let cards = document.getElementsByClassName('card');
 let editBtn = document.getElementsByClassName('edit-btn');
 
+let filterBtn = document.getElementsByClassName('filter-button');
+
 let months = ['January', 'February', 'March', 'May', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 let curMonth = 9;
 let curFilter = ['None', 'None'];
@@ -49,6 +51,9 @@ function monthClick() {
 			// Resets filters
 			curFilter[0] = 'None';
 			curFilter[1] = 'None';
+			filterBtn[0].innerText = filterBtn[0].classList[1];
+			filterBtn[1].innerText = filterBtn[1].classList[1];
+
 			resetFilter();
 
 			floatAnnouncements();
@@ -176,12 +181,11 @@ function floatAnnouncements() {
 
 // Displays filter dropdown when button clicked
 function filterBtnClick() {
-	let filterBtn = document.getElementsByClassName('filter-button');
-
 	for (let i = 0; i < filterBtn.length; i++) {
 		filterBtn[i].onclick = function() {
 			let content = this.nextElementSibling;
-
+			
+			// console.log(this);
 			if(getComputedStyle(content).display == 'none')
 				$(content).show('fast');
 			else
@@ -208,12 +212,12 @@ function filterElementClick(filterIndex, filter, type) {
 			curFilter[filterIndex] = this.innerText;
 
 			resetFilter();
-
+			console.log(filter);
 			// Sets filter
 			if (curFilter[filterIndex] == 'None') {
-				filter.firstElementChild.innerText = type;
+				filter.innerText = type;
 			} else {
-				filter.firstElementChild.innerText = this.innerText;
+				filter.innerText = this.innerText;
 				addFilter();
 			}
 		}
@@ -244,7 +248,6 @@ function addFilter() {
 			for (let j = 1; j < dates[i].children.length; j++) {
 				if (!dates[i].children[j].classList.contains('hidden-card')) {
 					visible = true;
-					break;
 				} else {
 					$(dates[i].children[j]).hide('fast');
 				}
