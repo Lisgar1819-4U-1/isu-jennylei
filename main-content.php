@@ -69,7 +69,7 @@
 
 				$index = 1;
 				$prevDate = 0;
-				$prevMoth = 0;
+				$prevMonth = 0;
 				$ended = false;
 				while($row = $result->fetch_assoc()){
 					$id = $row["id"];
